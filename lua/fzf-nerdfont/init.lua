@@ -9,8 +9,11 @@ function FzfNerdfont.toggle()
         _G.FzfNerdfont.config = config.options
     end
 
-    local glyphs =
-        vim.fn.readfile(vim.fn.expand("~") .. "/Code/nvim-plugins/fzf-nerdfont.nvim/glyphnames")
+    local script_path = string.sub(debug.getinfo(1, "S").source, 2)
+
+    local script_dir = vim.fn.fnamemodify(script_path, ":h")
+
+    local glyphs = vim.fn.readfile(script_dir .. "/glyphnames")
 
     local fzf_lua = require("fzf-lua")
 
@@ -21,9 +24,7 @@ function FzfNerdfont.toggle()
         actions = {
             ["default"] = {
                 function(selected)
-                    -- close fzf-lua
                     vim.cmd([[q!]])
-
                     for _, f in ipairs(selected) do
                         local icon = f:match("^(%S+)")
                         -- Get current cursor position

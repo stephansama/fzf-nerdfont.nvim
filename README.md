@@ -1,100 +1,30 @@
 <p align="center">
-  <h1 align="center">fzf-nerdfont.nvim</h2>
+  <h1 align="center">fzf-nerdfont.nvim</h1>
 </p>
 
 <p align="center">
-    > A catch phrase that describes your plugin.
+    A Neovim plugin that provides a handy way to search and insert Nerd Font icons into your documents using fzf-lua.
 </p>
 
-<div align="center">
-    > Drag your video (<10MB) here to host it for free on GitHub.
-</div>
-
-<div align="center">
-
-> Videos don't work on GitHub mobile, so a GIF alternative can help users.
-
-_[GIF version of the showcase video for mobile users](SHOWCASE_GIF_LINK)_
-
-</div>
-
-## ⚡️ Features
-
-> Write short sentences describing your plugin features
-
-- FEATURE 1
-- FEATURE ..
-- FEATURE N
+![screenshot](https://raw.githubusercontent.com/stephansama/static/refs/heads/main/nvim-plugins/fzf-nerdfont.gif)
 
 ## 📋 Installation
 
-<div align="center">
-<table>
-<thead>
-<tr>
-<th>Package manager</th>
-<th>Snippet</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-[wbthomason/packer.nvim](https://github.com/wbthomason/packer.nvim)
-
-</td>
-<td>
-
 ```lua
--- stable version
-use {"fzf-nerdfont.nvim", tag = "*" }
--- dev version
-use {"fzf-nerdfont.nvim"}
+require("lazy").setup({
+    {
+        "stephansama/fzf-nerdfont.nvim",
+        cmd = "FzfNerdfont",
+        keys = {
+            {"<leader>fi", "<cmd>FzfNerdfont<CR>", desc= "Open fzf nerd font picker"}
+        }
+    }
+})
 ```
-
-</td>
-</tr>
-<tr>
-<td>
-
-[junegunn/vim-plug](https://github.com/junegunn/vim-plug)
-
-</td>
-<td>
-
-```lua
--- stable version
-Plug "fzf-nerdfont.nvim", { "tag": "*" }
--- dev version
-Plug "fzf-nerdfont.nvim"
-```
-
-</td>
-</tr>
-<tr>
-<td>
-
-[folke/lazy.nvim](https://github.com/folke/lazy.nvim)
-
-</td>
-<td>
-
-```lua
--- stable version
-require("lazy").setup({{"fzf-nerdfont.nvim", version = "*"}})
--- dev version
-require("lazy").setup({"fzf-nerdfont.nvim"})
-```
-
-</td>
-</tr>
-</tbody>
-</table>
-</div>
 
 ## ☄ Getting started
 
-> Describe how to use the plugin the simplest way
+This plugin provides a command `FzfNerdFont` that opens a fzf-lua window with a list of Nerd Font icons. You can search for an icon and press enter to insert it into the current buffer.
 
 ## ⚙ Configuration
 
@@ -117,7 +47,7 @@ require("fzf-nerdfont").setup({
 
 |   Command   |         Description        |
 |-------------|----------------------------|
-|  `:Toggle`  |     Enables the plugin.    |
+|  `:FzfNerdFont`  |     Shows the Nerd Font icon list with fzf-lua.    |
 
 ## ⌨ Contributing
 
@@ -126,7 +56,3 @@ PRs and issues are always welcome. Make sure to provide as much context as possi
 ## 🗞 Wiki
 
 You can find guides and showcase of the plugin on [the Wiki](https://github.com/stephansama/fzf-nerdfont.nvim/wiki)
-
-## 🎭 Motivations
-
-> If alternatives of your plugin exist, you can provide some pros/cons of using yours over the others.
