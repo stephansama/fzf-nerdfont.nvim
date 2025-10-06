@@ -1,5 +1,5 @@
-YourPluginName.disable()	neovim-plugin-boilerplate.txt	/*YourPluginName.disable()*
-YourPluginName.enable()	neovim-plugin-boilerplate.txt	/*YourPluginName.enable()*
-YourPluginName.options	neovim-plugin-boilerplate.txt	/*YourPluginName.options*
-YourPluginName.setup()	neovim-plugin-boilerplate.txt	/*YourPluginName.setup()*
-YourPluginName.toggle()	neovim-plugin-boilerplate.txt	/*YourPluginName.toggle()*
+FzfNerdfont.disable()	fzf-nerdfont.txt	/*FzfNerdfont.disable()*
+FzfNerdfont.enable()	fzf-nerdfont.txt	/*FzfNerdfont.enable()*
+FzfNerdfont.options	fzf-nerdfont.txt	/*FzfNerdfont.options*
+FzfNerdfont.setup()	fzf-nerdfont.txt	/*FzfNerdfont.setup()*
+FzfNerdfont.toggle()	fzf-nerdfont.txt	/*FzfNerdfont.toggle()*

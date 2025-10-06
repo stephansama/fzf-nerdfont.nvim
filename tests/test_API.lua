@@ -20,18 +20,18 @@ local T = MiniTest.new_set({
 T["setup()"] = MiniTest.new_set()
 
 T["setup()"]["sets exposed methods and default options value"] = function()
-    child.lua([[require('your-plugin-name').setup()]])
+    child.lua([[require('fzf-nerdfont').setup()]])
 
     -- global object that holds your plugin information
-    Helpers.expect.global_type(child, "_G.YourPluginName", "table")
+    Helpers.expect.global_type(child, "_G.FzfNerdfont", "table")
 
     -- public methods
-    Helpers.expect.global_type(child, "_G.YourPluginName.toggle", "function")
-    Helpers.expect.global_type(child, "_G.YourPluginName.disable", "function")
-    Helpers.expect.global_type(child, "_G.YourPluginName.enable", "function")
+    Helpers.expect.global_type(child, "_G.FzfNerdfont.toggle", "function")
+    Helpers.expect.global_type(child, "_G.FzfNerdfont.disable", "function")
+    Helpers.expect.global_type(child, "_G.FzfNerdfont.enable", "function")
 
     -- config
-    Helpers.expect.global_type(child, "_G.YourPluginName.config", "table")
+    Helpers.expect.global_type(child, "_G.FzfNerdfont.config", "table")
 
     -- assert the value, and the type
     Helpers.expect.config(child, "debug", false)
@@ -39,7 +39,7 @@ T["setup()"]["sets exposed methods and default options value"] = function()
 end
 
 T["setup()"]["overrides default values"] = function()
-    child.lua([[require('your-plugin-name').setup({
+    child.lua([[require('fzf-nerdfont').setup({
         -- write all the options with a value different than the default ones
         debug = true,
     })]])

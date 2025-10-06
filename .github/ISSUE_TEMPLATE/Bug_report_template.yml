@@ -12,7 +12,7 @@ body:
         - Is there an issue already opened for this bug?
         - Can I reproduce it?
 
-        In doubt, you can also open [a discussion](https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME/discussions/new/choose).
+        In doubt, you can also open [a discussion](https://github.com/stephansama/fzf-nerdfont.nvim/discussions/new/choose).
   - type: textarea
     attributes:
       label: Description
@@ -46,7 +46,7 @@ body:
     id: logs
     attributes:
       label: Relevant log output
-      description: Please copy and paste any relevant log output. You can set `debug = true` in your YOUR_REPOSITORY_NAME config and then use `:message<CR>` in order to see the logs.
+      description: Please copy and paste any relevant log output. You can set `debug = true` in your fzf-nerdfont.nvim config and then use `:message<CR>` in order to see the logs.
       render: shell
   - type: checkboxes
     attributes:

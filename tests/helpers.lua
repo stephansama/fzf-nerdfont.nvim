@@ -12,7 +12,7 @@ Helpers.expect.buf_width = MiniTest.new_expectation(
     "variable in child process matches",
     function(child, field, value)
         return Helpers.expect.equality(
-            child.lua_get("vim.api.nvim_win_get_width(_G.YourPluginName.state." .. field .. ")"),
+            child.lua_get("vim.api.nvim_win_get_width(_G.FzfNerdfont.state." .. field .. ")"),
             value
         )
     end,
@@ -39,9 +39,9 @@ Helpers.expect.config = MiniTest.new_expectation(
     "config option matches",
     function(child, field, value)
         if field == "" then
-            return Helpers.expect.global(child, "_G.YourPluginName.config" .. field, value)
+            return Helpers.expect.global(child, "_G.FzfNerdfont.config" .. field, value)
         else
-            return Helpers.expect.global(child, "_G.YourPluginName.config." .. field, value)
+            return Helpers.expect.global(child, "_G.FzfNerdfont.config." .. field, value)
         end
     end,
     error_message
@@ -50,19 +50,19 @@ Helpers.expect.config = MiniTest.new_expectation(
 Helpers.expect.config_type = MiniTest.new_expectation(
     "config option type matches",
     function(child, field, value)
-        return Helpers.expect.global(child, "type(_G.YourPluginName.config." .. field .. ")", value)
+        return Helpers.expect.global(child, "type(_G.FzfNerdfont.config." .. field .. ")", value)
     end,
     error_message
 )
 
 Helpers.expect.state = MiniTest.new_expectation("state matches", function(child, field, value)
-    return Helpers.expect.global(child, "_G.YourPluginName.state." .. field, value)
+    return Helpers.expect.global(child, "_G.FzfNerdfont.state." .. field, value)
 end, error_message)
 
 Helpers.expect.state_type = MiniTest.new_expectation(
     "state type matches",
     function(child, field, value)
-        return Helpers.expect.global(child, "type(_G.YourPluginName.state." .. field .. ")", value)
+        return Helpers.expect.global(child, "type(_G.FzfNerdfont.state." .. field .. ")", value)
     end,
     error_message
 )
@@ -94,12 +94,12 @@ Helpers.new_child_neovim = function()
     end
 
     child.nnp = function()
-        child.cmd("YourPluginName")
+        child.cmd("FzfNerdfont")
         child.wait()
     end
 
     child.get_wins_in_tab = function(tab)
-        tab = tab or "_G.YourPluginName.state.active_tab"
+        tab = tab or "_G.FzfNerdfont.state.active_tab"
 
         return child.lua_get("vim.api.nvim_tabpage_list_wins(" .. tab .. ")")
     end

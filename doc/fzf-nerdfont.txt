@@ -1,46 +1,46 @@
 ==============================================================================
 ------------------------------------------------------------------------------
-                                                       *YourPluginName.toggle()*
-                           `YourPluginName.toggle`()
+                                                          *FzfNerdfont.toggle()*
+                             `FzfNerdfont.toggle`()
 Toggle the plugin by calling the `enable`/`disable` methods respectively.
 
 ------------------------------------------------------------------------------
-                                                       *YourPluginName.enable()*
-                        `YourPluginName.enable`({scope})
+                                                          *FzfNerdfont.enable()*
+                         `FzfNerdfont.enable`({scope})
 Initializes the plugin, sets event listeners and internal state.
 
 ------------------------------------------------------------------------------
-                                                      *YourPluginName.disable()*
-                           `YourPluginName.disable`()
+                                                         *FzfNerdfont.disable()*
+                            `FzfNerdfont.disable`()
 Disables the plugin, clear highlight groups and autocmds, closes side buffers and resets the internal state.
 
 
 ==============================================================================
 ------------------------------------------------------------------------------
-                                                        *YourPluginName.options*
-                            `YourPluginName.options`
-YourPluginName configuration with its default values.
+                                                           *FzfNerdfont.options*
+                             `FzfNerdfont.options`
+FzfNerdfont configuration with its default values.
 
 Type ~
 `(table)`
 Default values:
 >lua
-  YourPluginName.options = {
+  FzfNerdfont.options = {
       -- Prints useful logs about what event are triggered, and reasons actions are executed.
       debug = false,
   }
 
 <
 ------------------------------------------------------------------------------
-                                                        *YourPluginName.setup()*
-                       `YourPluginName.setup`({options})
-Define your your-plugin-name setup.
+                                                           *FzfNerdfont.setup()*
+                         `FzfNerdfont.setup`({options})
+Define your fzf-nerdfont setup.
 
 Parameters ~
-{options} `(table)` Module config table. See |YourPluginName.options|.
+{options} `(table)` Module config table. See |FzfNerdfont.options|.
 
 Usage ~
-`require("your-plugin-name").setup()` (add `{}` with your |YourPluginName.options| table)
+`require("fzf-nerdfont").setup()` (add `{}` with your |FzfNerdfont.options| table)
 
 
  vim:tw=78:ts=8:noet:ft=help:norl:
