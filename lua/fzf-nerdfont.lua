@@ -20,7 +20,7 @@ function FzfNerdFont.enable(scope)
         return
     end
     scope = scope or "public_api_enable"
-    main.toggle(scope)
+    main.enable(scope)
 end
 
 --- Disables the plugin, clear highlight groups and autocmds,
@@ -29,7 +29,7 @@ function FzfNerdFont.disable()
     if vim.g.fzf_nerd_font_setup ~= 1 then
         return
     end
-    main.toggle("public_api_disable")
+    main.disable("public_api_disable")
 end
 
 -- setup FzfNerdFont options and merge them with user provided ones.

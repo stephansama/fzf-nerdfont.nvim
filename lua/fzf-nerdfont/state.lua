@@ -12,4 +12,4 @@ function state:new()
     return obj
 end
 
-return state
+return state:new()

@@ -32,6 +32,9 @@ function Main.enable(scope)
     -- (DrKJeff16): Need a better file location
     local glyphs = vim.fn.readfile(script_dir .. "/glyphnames")
 
+    state.enabled = true
+    log.debug(scope, "fzf-nerdfont enabled")
+
     require("fzf-lua").fzf_exec(glyphs, {
         fzf_opts = { ["--multi"] = true },
         actions = {
@@ -44,7 +47,6 @@ function Main.enable(scope)
                         row = row - 1 -- API is 0-indexed
 
                         local line = vim.api.nvim_get_current_line()
-
                         local new_line = line:sub(1, col) .. icon .. line:sub(col + 1)
                         vim.api.nvim_set_current_line(new_line)
                         vim.api.nvim_win_set_cursor(0, { row + 1, col + #icon })
@@ -54,9 +56,6 @@ function Main.enable(scope)
         },
         prompt = "Select Icon>",
     })
-
-    state.enabled = true
-    log.debug(scope, "fzf-nerdfont enabled")
 end
 
 --- Disables the plugin for the given tab, clear highlight groups and autocmds,
