@@ -1,9 +1,9 @@
 -- You can use this loaded variable to enable conditional parts of your plugin.
-if _G.FzfNerdfontLoaded then
+if vim.g.fzf_nerd_font_loaded == 1 then
     return
 end
 
-_G.FzfNerdfontLoaded = true
+vim.g.fzf_nerd_font_loaded = 1
 
 vim.api.nvim_create_user_command("FzfNerdfont", function()
     require("fzf-nerdfont").toggle()

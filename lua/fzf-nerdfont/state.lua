@@ -1,43 +1,15 @@
-local log = require("fzf-nerdfont.util.log")
-
-local state = { enabled = false }
+---@class FzfNerdFont.State
+---@field enabled? boolean
+local state = {}
 
 ---Sets the state to its original value.
 ---
----@private
-function state:init()
-    self.enabled = false
-end
+function state:new()
+    self.__index = self
+    local obj = setmetatable({}, self)
+    obj.enabled = false
 
----Saves the state in the global _G.FzfNerdfont.state object.
----
----@private
-function state:save()
-    log.debug("state.save", "saving state globally to _G.FzfNerdfont.state")
-
-    _G.FzfNerdfont.state = self
-end
-
---- Sets the global state as enabled.
----
----@private
-function state:set_enabled()
-    self.enabled = true
-end
-
---- Sets the global state as disabled.
----
----@private
-function state:set_disabled()
-    self.enabled = false
-end
-
----Whether the FzfNerdfont is enabled or not.
----
----@return boolean: the `enabled` state value.
----@private
-function state:get_enabled()
-    return self.enabled
+    return obj
 end
 
 return state
