@@ -1,15 +1,13 @@
 ---@class FzfNerdFont.State
 ---@field enabled? boolean
-local state = {}
+local state = { enabled = false }
 
 ---Sets the state to its original value.
 ---
-function state:new()
-    self.__index = self
-    local obj = setmetatable({}, self)
+function state.new()
+    local obj = setmetatable({}, { __index = state })
     obj.enabled = false
-
     return obj
 end
 
-return state:new()
+return state

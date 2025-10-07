@@ -9,9 +9,9 @@ local Main = {}
 --
 ---@param scope? string: internal identifier for logging purposes.
 function Main.toggle(scope)
-    scope = scope or ''
+    scope = scope or ""
     if state.enabled then
-        Main.disable(scope)
+        Main.disable("public_api_disable")
         return
     end
     Main.enable(scope)
@@ -21,7 +21,7 @@ end
 ---
 --- @param scope? string: internal identifier for logging purposes.
 function Main.enable(scope)
-    scope = scope or ''
+    scope = scope or ""
     if state.enabled then
         log.debug(scope, "fzf-nerdfont is already enabled")
         return
@@ -31,6 +31,8 @@ function Main.enable(scope)
     local script_dir = vim.fn.fnamemodify(script_path, ":h")
     -- (DrKJeff16): Need a better file location
     local glyphs = vim.fn.readfile(script_dir .. "/glyphnames")
+    local original_buf = vim.api.nvim_get_current_buf()
+    local original_win = vim.api.nvim_get_current_win()
 
     state.enabled = true
     log.debug(scope, "fzf-nerdfont enabled")
@@ -40,17 +42,18 @@ function Main.enable(scope)
         actions = {
             default = {
                 function(selected) ---@param selected string[]
-                    vim.cmd.quit({ bang = true })
+                    unpack = unpack or table.unpack
                     for _, f in ipairs(selected) do
                         local icon = f:match("^(%S+)")
-                        local row, col = unpack(vim.api.nvim_win_get_cursor(0)) -- Get current cursor position
-                        row = row - 1 -- API is 0-indexed
-
-                        local line = vim.api.nvim_get_current_line()
-                        local new_line = line:sub(1, col) .. icon .. line:sub(col + 1)
-                        vim.api.nvim_set_current_line(new_line)
-                        vim.api.nvim_win_set_cursor(0, { row + 1, col + #icon })
+                        local row, col = unpack(vim.api.nvim_win_get_cursor(original_win)) -- Get current cursor position
+                        local line =
+                            unpack(vim.api.nvim_buf_get_lines(original_buf, row - 1, row, false))
+                        local text = line:sub(1, col) .. icon .. line:sub(col + 1)
+                        local new_line = { text }
+                        vim.api.nvim_buf_set_lines(original_buf, row - 1, row, true, new_line)
+                        vim.api.nvim_win_set_cursor(original_win, { row, col })
                     end
+                    vim.cmd.quit({ bang = true })
                 end,
             },
         },
@@ -63,7 +66,7 @@ end
 ---
 --- @param scope? string: internal identifier for logging purposes.
 function Main.disable(scope)
-    scope = scope or ''
+    scope = scope or ""
     if not state.enabled then
         log.debug(scope, "fzf-nerdfont is already disabled")
         return
