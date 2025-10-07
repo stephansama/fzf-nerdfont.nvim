@@ -17,12 +17,14 @@ Using `lazy.nvim`:
 ```lua
 require("lazy").setup({
     spec = {
+      {
         "stephansama/fzf-nerdfont.nvim",
         dependencies = { "ibhagwan/fzf-lua" },
         cmd = "FzfNerdfont",
         keys = {
             { "<leader>fi", "<cmd>FzfNerdfont<CR>", desc= "Open fzf nerd font picker" }
         }
+      }
     }
 })
 ```
