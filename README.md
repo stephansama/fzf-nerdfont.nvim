@@ -64,6 +64,7 @@ require("fzf-nerdfont").setup({
 ## FAQ
 
 1. _**How to use this plugin from within insert mode?**_
+
   ```lua
   local function insert_fzf_nerdfont()
     vim.cmd.stopinsert()
@@ -79,10 +80,6 @@ require("fzf-nerdfont").setup({
 ## ⌨ Contributing
 
 PRs and issues are always welcome. Make sure to provide as much context as possible when opening one.
-
-## 🗞 Wiki
-
-You can find guides and showcase of the plugin on [the Wiki](https://github.com/stephansama/fzf-nerdfont.nvim/wiki).
 
 ## Special Thanks
 
