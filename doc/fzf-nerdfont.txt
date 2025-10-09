@@ -61,6 +61,8 @@ Parameters ~
                      `set_icon`({selected}, {bufnr}, {win})
 Parameters ~
 {selected} `(string[])`
+{bufnr} `(integer)`
+{win} `(integer)`
 
 ------------------------------------------------------------------------------
                                                                     *Main.run()*
