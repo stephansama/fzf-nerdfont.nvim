@@ -1,0 +1,7 @@
+std = "vim" # Points to the `vim.yml` file
+exclude = ["deps/*", "tests/*"]
+
+[lints]
+global_usage    = "allow"
+mixed_table     = "allow"
+unused_variable = "allow"
