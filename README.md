@@ -21,6 +21,7 @@ require("lazy").setup({
       {
         "stephansama/fzf-nerdfont.nvim",
         lazy = true,
+        build = ":FzfNerdfont generate",
         dependencies = { "ibhagwan/fzf-lua" },
         cmd = "FzfNerdfont",
         keys = {
