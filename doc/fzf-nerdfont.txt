@@ -119,7 +119,7 @@ prints only if debug is true.
 
 Parameters ~
 {scope} `(string)`: the scope from where this function is called.
-{level} `(string)`: the log level of vim.notify.
+{level} `(vim.log.levels)`: the log level of vim.notify.
 {verbose} `(boolean)`: when false, only prints when config.debug is true.
 {str} `(string)`: the formatted string.
 {...} `(any)`: the arguments of the formatted string.
