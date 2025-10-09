@@ -11,30 +11,32 @@ concurrency:
   cancel-in-progress: true
 jobs:
   lint:
+    name: Code Lint
     runs-on: ubuntu-latest
-    name: lint
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v5
       - uses: JohnnyMorganz/stylua-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           version: latest
           args: --check . -g '*.lua' -g '!deps/'
   documentation:
+    name: Documentation
     runs-on: ubuntu-latest
-    name: documentation
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v5
         with:
           fetch-depth: 2
-      - name: setup neovim
+      - name: Setup Neovim
         uses: rhysd/action-setup-vim@v1
         with:
           neovim: true
           version: v0.11.3
-      - name: generate documentation
+      - name: Generate Docs
         run: make documentation-ci
-      - name: check docs diff
+      - name: Check Docs Diff
         run: exit $(git status --porcelain doc | wc -l | tr -d " ")
   tests:
     needs:
@@ -46,7 +48,8 @@ jobs:
       matrix:
         neovim_version: ['v0.9.5', 'v0.10.1', 'v0.11.3']
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v5
       - run: date +%F > todays-date
       - name: restore luals cache
         uses: actions/cache@v4
@@ -54,71 +57,74 @@ jobs:
         with:
           path: .ci/lua-ls
           key: ${{ env.LUA_LS_VERSION }}
-      - name: setup luals
+      - name: Setup LuaLS
         if: ${{ steps.cache.outputs.cache-hit != 'true' }}
         run: mkdir -p .ci/lua-ls && curl -sL "https://github.com/LuaLS/lua-language-server/releases/download/${{ env.LUA_LS_VERSION }}/lua-language-server-${{ env.LUA_LS_VERSION }}-linux-x64.tar.gz" | tar xzf - -C "${PWD}/.ci/lua-ls"
-      - name: setup neovim
+      - name: Setup Neovim
         uses: rhysd/action-setup-vim@v1
         with:
           neovim: true
           version: ${{ matrix.neovim_version }}
-      - name: run luals
+      - name: Run Luals
         run: |
           export PATH="${PWD}/.ci/lua-ls/bin:${PATH}"
           nvim --version
           make luals-ci
-      - name: run tests
+      - name: Run Tests
         run: make test-ci
   tests-nightly:
-    needs:
-      - lint
-      - documentation
+    name: Test on Neovim Nightly
     runs-on: ubuntu-latest
     timeout-minutes: 1
     continue-on-error: true
+    needs:
+      - lint
+      - documentation
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v5
       - run: date +%F > todays-date
-      - name: restore cache for today's nightly.
+      - name: Restore Cache for Today's Nightly.
         uses: actions/cache@v4
         with:
           path: _neovim
           key: ${{ runner.os }}-x64-${{ hashFiles('todays-date') }}
-      - name: restore luals cache
+      - name: Restore LuaLS Cache
         uses: actions/cache@v4
         id: cache
         with:
           path: .ci/lua-ls
           key: ${{ env.LUA_LS_VERSION }}
-      - name: setup luals
+      - name: Setup LuaLS
         if: ${{ steps.cache.outputs.cache-hit != 'true' }}
         run: mkdir -p .ci/lua-ls && curl -sL "https://github.com/LuaLS/lua-language-server/releases/download/${{ env.LUA_LS_VERSION }}/lua-language-server-${{ env.LUA_LS_VERSION }}-linux-x64.tar.gz" | tar xzf - -C "${PWD}/.ci/lua-ls"
-      - name: setup neovim
+      - name: Setup Neovim
         uses: rhysd/action-setup-vim@v1
         with:
           neovim: true
           version: nightly
-      - name: run luals
+      - name: Run LuaLS
         run: |
           export PATH="${PWD}/.ci/lua-ls/bin:${PATH}"
           nvim --version
           make luals-ci
-      - name: run tests
+      - name: Run Tests
         run: make test-ci
   release:
-    name: release
+    name: Release
     if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
     needs:
       - tests
-    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v5
       - uses: googleapis/release-please-action@v4
         id: release
         with:
           release-type: simple
           package-name: fzf-nerdfont.nvim
-      - name: tag stable versions
+      - name: Tag Stable Version
         if: ${{ steps.release.outputs.release_created }}
         run: |
           git config user.name github-actions[bot]
