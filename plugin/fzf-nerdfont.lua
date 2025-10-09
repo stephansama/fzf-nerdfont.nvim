@@ -6,5 +6,5 @@ end
 vim.g.fzf_nerd_font_loaded = 1
 
 vim.api.nvim_create_user_command("FzfNerdfont", function()
-    require("fzf-nerdfont").toggle()
+    require("fzf-nerdfont").run()
 end, {})
