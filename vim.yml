@@ -5,8 +5,6 @@ name: vim
 globals:
   _:
     any: true
-  os:
-    any: true
   a:
     any: true
   jit:
