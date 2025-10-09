@@ -1,39 +1,51 @@
-<p align="center">
-  <h1 align="center">fzf-nerdfont.nvim</h1>
-</p>
+<div align="center">
 
-<p align="center">
-    A Neovim plugin that provides a handy way to search and insert Nerd Font icons into your documents using fzf-lua.
-</p>
+# fzf-nerdfont.nvim
+
+A Neovim plugin that provides a handy way to search
+and insert Nerd Font icons into your documents using
+[`ibhagwan/fzf-lua`](https://github.com/ibhagwan/fzf-lua).
 
 ![screenshot](https://raw.githubusercontent.com/stephansama/static/refs/heads/main/nvim-plugins/fzf-nerdfont.gif)
 
+</div>
+
 ## 📋 Installation
+
+Using `lazy.nvim`:
 
 ```lua
 require("lazy").setup({
-    {
+    spec = {
+      {
         "stephansama/fzf-nerdfont.nvim",
+        dependencies = { "ibhagwan/fzf-lua" },
         cmd = "FzfNerdfont",
         keys = {
-            {"<leader>fi", "<cmd>FzfNerdfont<CR>", desc= "Open fzf nerd font picker"}
+            { "<leader>fi", "<cmd>FzfNerdfont<CR>", desc= "Open fzf nerd font picker" }
         }
+      }
     }
 })
 ```
 
 ## ☄ Getting started
 
-This plugin provides a command `FzfNerdFont` that opens a fzf-lua window with a list of Nerd Font icons. You can search for an icon and press enter to insert it into the current buffer.
+This plugin provides a command `FzfNerdFont` that opens a `fzf-lua` window
+with a list of Nerd Font icons.
+You can search for an icon and press enter to insert it into the current buffer.
 
 ## ⚙ Configuration
 
-> The configuration list sometimes become cumbersome, making it folded by default reduce the noise of the README file.
+> [!NOTE]
+> The configuration list sometimes become cumbersome,
+> making it folded by default reduce the noise of the README file.
 
 <details>
 <summary>Click to unfold the full list of options with their default values</summary>
 
-> **Note**: The options are also available in Neovim by calling `:h fzf-nerdfont.options`
+> [!NOTE]
+> The options are also available in Neovim by calling `:h fzf-nerdfont.options`
 
 ```lua
 require("fzf-nerdfont").setup({
@@ -48,6 +60,24 @@ require("fzf-nerdfont").setup({
 |   Command   |         Description        |
 |-------------|----------------------------|
 |  `:FzfNerdFont`  |     Shows the Nerd Font icon list with fzf-lua.    |
+
+---
+
+## FAQ
+
+1. How to use this plugin from within insert mode
+
+```lua
+local insert_fzf_nerdfont = function()
+ vim.cmd("stopinsert")
+ vim.cmd("FzfNerdfont")
+end
+
+vim.keymap.set("i", "<C-i>", insert_fzf_nerdfont, {
+ noremap = true,
+ silent = true,
+})
+```
 
 ## ⌨ Contributing
 
