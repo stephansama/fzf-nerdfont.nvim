@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/stephansama/fzf-nerdfont.nvim/compare/v1.0.0...v1.0.1) (2025-10-09)
+
+
+### Bug Fixes
+
+* use correct annotation in `util/log.lua` ([cc6b834](https://github.com/stephansama/fzf-nerdfont.nvim/commit/cc6b834c0a7976aeaa865d92e267548e8181a584))
+
 ## 1.0.0 (2025-10-09)
 
 ### ⚠ BREAKING CHANGES
