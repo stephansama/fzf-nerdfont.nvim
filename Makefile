@@ -1,5 +1,7 @@
 .SUFFIXES:
 
+.PHONY: all test-nightly test-0.8.3 test documentation documentation-ci lint luals-ci luals update_glyphs setup
+
 all: documentation lint luals test
 
 # runs all the test files.
@@ -38,7 +40,7 @@ documentation-ci: deps documentation
 # performs a lint check and fixes issue if possible, following the config in `stylua.toml`.
 lint:
 	stylua . -g '*.lua' -g '!deps/' -g '!nightly/'
-	luacheck plugin/ lua/
+	selene plugin/ lua/
 
 luals-ci:
 	rm -rf .ci/lua-ls/log
