@@ -63,6 +63,22 @@ require("fzf-nerdfont").setup({
 
 ---
 
+## FAQ
+
+1. How to use this plugin from within insert mode
+
+```lua
+local insert_fzf_nerdfont = function()
+ vim.cmd("stopinsert")
+ vim.cmd("FzfNerdfont")
+end
+
+vim.keymap.set("i", "<C-i>", insert_fzf_nerdfont, {
+ noremap = true,
+ silent = true,
+})
+```
+
 ## ⌨ Contributing
 
 PRs and issues are always welcome. Make sure to provide as much context as possible when opening one.
