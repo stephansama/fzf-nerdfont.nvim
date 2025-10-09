@@ -16,7 +16,7 @@ end
 --- prints only if debug is true.
 ---
 ---@param scope string: the scope from where this function is called.
----@param level vim.log.levels: the log level of vim.notify.
+---@param level integer: the log level of vim.notify.
 ---@param verbose boolean: when false, only prints when config.debug is true.
 ---@param str string: the formatted string.
 ---@param ... any: the arguments of the formatted string.
