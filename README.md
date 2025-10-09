@@ -56,3 +56,9 @@ PRs and issues are always welcome. Make sure to provide as much context as possi
 ## 🗞 Wiki
 
 You can find guides and showcase of the plugin on [the Wiki](https://github.com/stephansama/fzf-nerdfont.nvim/wiki)
+
+## Special Thanks
+
+A very special thanks to [DrKJeff16](https://github.com/DrKJeff16/) for helping me with the initial setup of this plugin.
+
+And a special thank you to [fzf-lua](https://github.com/ibhagwan/fzf-lua)
