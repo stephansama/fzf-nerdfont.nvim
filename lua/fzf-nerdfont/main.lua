@@ -6,19 +6,23 @@ local Main = {}
 
 local _unpack = unpack or table.unpack
 
----@param selected string[]
-local function set_icon(selected)
-    local original_buf = vim.api.nvim_get_current_buf()
-    local original_win = vim.api.nvim_get_current_win()
+---@param txt string
+---@param bufnr integer
+---@param win integer
+local function insert_text(txt, bufnr, win)
+    local row, col = _unpack(vim.api.nvim_win_get_cursor(win)) -- Get current cursor position
+    local line = _unpack(vim.api.nvim_buf_get_lines(bufnr, row - 1, row, false))
+    local icon = txt:match("^(%S+)")
+    local text = line:sub(1, col) .. icon .. line:sub(col + 1)
+    local new_line = { text }
+    vim.api.nvim_buf_set_lines(bufnr, row - 1, row, true, new_line)
+    vim.api.nvim_win_set_cursor(win, { row, col })
+end
 
+---@param selected string[]
+local function set_icon(selected, bufnr, win)
     for _, f in ipairs(selected) do
-        local row, col = _unpack(vim.api.nvim_win_get_cursor(original_win)) -- Get current cursor position
-        local line = _unpack(vim.api.nvim_buf_get_lines(original_buf, row - 1, row, false))
-        local icon = f:match("^(%S+)")
-        local text = line:sub(1, col) .. icon .. line:sub(col + 1)
-        local new_line = { text }
-        vim.api.nvim_buf_set_lines(original_buf, row - 1, row, true, new_line)
-        vim.api.nvim_win_set_cursor(original_win, { row, col })
+        insert_text(f, bufnr, win)
     end
     vim.cmd.quit({ bang = true })
 end
@@ -36,11 +40,16 @@ function Main.run(scope)
 
     log.debug(scope, "fzf-nerdfont enabled")
 
+    local original_buf = vim.api.nvim_get_current_buf()
+    local original_win = vim.api.nvim_get_current_win()
     require("fzf-lua").fzf_exec(glyphs, {
         fzf_opts = { ["--multi"] = true },
         prompt = "Select Icon>",
         actions = {
-            default = { set_icon },
+            default = { function(selected)
+                set_icon(selected, original_buf, original_win)
+            end,
+        }
         },
     })
 end
