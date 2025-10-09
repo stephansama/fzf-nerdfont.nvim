@@ -4,7 +4,7 @@ USAGE="\033[0;37m[INFO] - usage: USERNAME=my-github-username PLUGIN_NAME=my-awes
 echo -e "$USAGE"
 
 if [[ -z "$USERNAME" ]]; then
-    read -rp '> No USERNAME provided. Enter your GitHUb/GitLab username: ' USERNAME
+    read -rp '> No USERNAME provided. Enter your GitHub/GitLab username: ' USERNAME
 fi
 
 if [[ -z "$REPOSITORY_NAME" ]]; then
