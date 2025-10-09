@@ -35,7 +35,7 @@ function log.notify(scope, level, verbose, str, ...)
     end
 
     vim.notify(
-        ("[fzf-nerdfont.nvim@%s] %s"):format(scope, (str):format(...)),
+        ("[fzf-nerdfont.nvim@%s] %s"):format(scope, str:format(...)),
         level,
         { title = "fzf-nerdfont.nvim" }
     )
