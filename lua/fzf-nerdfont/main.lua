@@ -35,10 +35,7 @@ end
 function Main.run(scope)
     scope = scope or ""
 
-    local script_path = debug.getinfo(1, "S").source:sub(2)
-    local script_dir = vim.fn.fnamemodify(script_path, ":h")
-    -- TODO: (DrKJeff16) Need a better file location
-    local glyphs = vim.fn.readfile(script_dir .. "/glyphnames")
+    local glyphs = vim.fn.readfile(vim.fn.stdpath("data") .. "/glyphnames")
 
     log.debug(scope, "fzf-nerdfont enabled")
 
