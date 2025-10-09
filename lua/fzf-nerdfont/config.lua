@@ -26,6 +26,8 @@ function FzfNerdConfig.setup(options)
     log.enabled = FzfNerdConfig.options.debug
     log.warn_deprecation(FzfNerdConfig.options)
 
+    _G.FzfNerdfont.config = FzfNerdConfig.options
+
     vim.g.fzf_nerd_font_setup = 1
 end
 

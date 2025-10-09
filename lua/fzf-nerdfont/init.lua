@@ -16,4 +16,6 @@ end
 -- setup FzfNerdFont options and merge them with user provided ones.
 FzfNerdFont.setup = config.setup
 
+_G.FzfNerdfont = FzfNerdFont
+
 return FzfNerdFont

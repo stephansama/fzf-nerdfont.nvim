@@ -26,9 +26,7 @@ T["setup()"]["sets exposed methods and default options value"] = function()
     Helpers.expect.global_type(child, "_G.FzfNerdfont", "table")
 
     -- public methods
-    Helpers.expect.global_type(child, "_G.FzfNerdfont.toggle", "function")
-    Helpers.expect.global_type(child, "_G.FzfNerdfont.disable", "function")
-    Helpers.expect.global_type(child, "_G.FzfNerdfont.enable", "function")
+    Helpers.expect.global_type(child, "_G.FzfNerdfont.run", "function")
 
     -- config
     Helpers.expect.global_type(child, "_G.FzfNerdfont.config", "table")
