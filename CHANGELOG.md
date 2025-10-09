@@ -2,7 +2,6 @@
 
 ## 1.0.0 (2025-10-09)
 
-
 ### ⚠ BREAKING CHANGES
 
 * use target buffer for inserting text, state fix
@@ -16,13 +15,11 @@
 * restored `init.lua`, cleaned useless functions ([544d4d0](https://github.com/stephansama/fzf-nerdfont.nvim/commit/544d4d059abc0950a6edd780f853ff2a587ce36c))
 * updated documentation. readded _G for the sake of the unit tests ([9be0e9b](https://github.com/stephansama/fzf-nerdfont.nvim/commit/9be0e9b75fad5939c518d512489eb070296a8cbb))
 
-
 ### Bug Fixes
 
 * **main:** target window/buffer was the picker itself ([577e40a](https://github.com/stephansama/fzf-nerdfont.nvim/commit/577e40a424caae6a96eaf2ff252c51e8e6e5fa13))
 * oversights repaired ([f9491a4](https://github.com/stephansama/fzf-nerdfont.nvim/commit/f9491a4ec462592d40a962511434fc2054d95956))
 * use target buffer for inserting text, state fix ([a8a1481](https://github.com/stephansama/fzf-nerdfont.nvim/commit/a8a1481bad6d1bf7dc6d5d59d8439843ff1f75a8))
-
 
 ### Code Refactoring
 

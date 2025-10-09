@@ -16,12 +16,12 @@ end
 --- prints only if debug is true.
 ---
 ---@param scope string: the scope from where this function is called.
----@param level string: the log level of vim.notify.
+---@param level integer: the log level of vim.notify.
 ---@param verbose boolean: when false, only prints when config.debug is true.
 ---@param str string: the formatted string.
 ---@param ... any: the arguments of the formatted string.
 function log.notify(scope, level, verbose, str, ...)
-    if not verbose or vim.g.fzf_nerd_font_setup ~= 1 or not log.enabled then
+    if not (verbose and log.enabled) or vim.g.fzf_nerd_font_setup ~= 1 then
         return
     end
 
