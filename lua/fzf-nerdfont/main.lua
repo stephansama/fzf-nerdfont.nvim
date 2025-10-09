@@ -20,6 +20,8 @@ local function insert_text(txt, bufnr, win)
 end
 
 ---@param selected string[]
+---@param bufnr integer
+---@param win integer
 local function set_icon(selected, bufnr, win)
     for _, f in ipairs(selected) do
         insert_text(f, bufnr, win)
@@ -46,10 +48,11 @@ function Main.run(scope)
         fzf_opts = { ["--multi"] = true },
         prompt = "Select Icon>",
         actions = {
-            default = { function(selected)
-                set_icon(selected, original_buf, original_win)
-            end,
-        }
+            default = {
+                function(selected)
+                    set_icon(selected, original_buf, original_win)
+                end,
+            },
         },
     })
 end
