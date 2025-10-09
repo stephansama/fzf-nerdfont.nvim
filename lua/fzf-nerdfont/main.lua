@@ -1,57 +1,60 @@
 local log = require("fzf-nerdfont.util.log")
-local state = require("fzf-nerdfont.state")
 
 -- internal methods
-local main = {}
+---@class FzfNerdFont.Main
+local Main = {}
 
--- Toggle the plugin by calling the `enable`/`disable` methods respectively.
---
----@param scope string: internal identifier for logging purposes.
----@private
-function main.toggle(scope)
-    if state.get_enabled(state) then
-        log.debug(scope, "fzf-nerdfont is now disabled!")
+local _unpack = unpack or table.unpack
 
-        return main.disable(scope)
+---@param txt string
+---@param bufnr integer
+---@param win integer
+local function insert_text(txt, bufnr, win)
+    local row, col = _unpack(vim.api.nvim_win_get_cursor(win)) -- Get current cursor position
+    local line = _unpack(vim.api.nvim_buf_get_lines(bufnr, row - 1, row, false))
+    local icon = txt:match("^(%S+)")
+    local text = line:sub(1, col) .. icon .. line:sub(col + 1)
+    local new_line = { text }
+    vim.api.nvim_buf_set_lines(bufnr, row - 1, row, true, new_line)
+    vim.api.nvim_win_set_cursor(win, { row, col })
+end
+
+---@param selected string[]
+---@param bufnr integer
+---@param win integer
+local function set_icon(selected, bufnr, win)
+    for _, f in ipairs(selected) do
+        insert_text(f, bufnr, win)
     end
-
-    log.debug(scope, "fzf-nerdfont is now enabled!")
-
-    main.enable(scope)
+    vim.cmd.quit({ bang = true })
 end
 
 --- Initializes the plugin, sets event listeners and internal state.
 ---
---- @param scope string: internal identifier for logging purposes.
----@private
-function main.enable(scope)
-    if state.get_enabled(state) then
-        log.debug(scope, "fzf-nerdfont is already enabled")
+--- @param scope? string: internal identifier for logging purposes.
+function Main.run(scope)
+    scope = scope or ""
 
-        return
-    end
+    local script_path = debug.getinfo(1, "S").source:sub(2)
+    local script_dir = vim.fn.fnamemodify(script_path, ":h")
+    -- TODO: (DrKJeff16) Need a better file location
+    local glyphs = vim.fn.readfile(script_dir .. "/glyphnames")
 
-    state.set_enabled(state)
+    log.debug(scope, "fzf-nerdfont enabled")
 
-    -- saves the state globally to `_G.FzfNerdfont.state`
-    state.save(state)
+    local original_buf = vim.api.nvim_get_current_buf()
+    local original_win = vim.api.nvim_get_current_win()
+    require("fzf-lua").fzf_exec(glyphs, {
+        fzf_opts = { ["--multi"] = true },
+        prompt = "Select Icon>",
+        actions = {
+            default = {
+                function(selected)
+                    set_icon(selected, original_buf, original_win)
+                end,
+            },
+        },
+    })
 end
 
---- Disables the plugin for the given tab, clear highlight groups and autocmds, closes side buffers and resets the internal state.
----
---- @param scope string: internal identifier for logging purposes.
----@private
-function main.disable(scope)
-    if not state.get_enabled(state) then
-        log.debug(scope, "fzf-nerdfont is already disabled")
-
-        return
-    end
-
-    state.set_disabled(state)
-
-    -- saves the state globally to `_G.FzfNerdfont.state`
-    state.save(state)
-end
-
-return main
+return Main
