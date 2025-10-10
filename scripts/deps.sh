@@ -22,7 +22,7 @@ __get_lua_ls() {
 	printf "%s\n" "mkdir -p .ci/lua-ls" "curl -sL \"\$LUALS_URL\" tar xzf - -C \"\$(pwd)/.ci/lua-ls"
 
     mkdir -p .ci/lua-ls
-	curl -sL "$LUALS_URL" tar xzf - -C "$(pwd)/.ci/lua-ls"
+	curl -sL "$LUALS_URL" | tar xzf - -C "$(pwd)/.ci/lua-ls"
 
     return $?
 }
