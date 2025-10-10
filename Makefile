@@ -33,9 +33,9 @@ test-0.8.3:
 	bob use 0.8.3
 	$(MAKE) test
 
-# cleans the `deps/` directory, useful for resetting the environment.
+# cleans the `deps/` and `.ci/` directories, useful for resetting the environment.
 clean:
-	rm -rf deps
+	rm -rf deps .ci
 
 # installs deps, then generates documentation.
 documentation: deps/mini
