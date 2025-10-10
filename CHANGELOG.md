@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/stephansama/fzf-nerdfont.nvim/compare/v2.0.0...v2.1.0) (2025-10-10)
+
+
+### Features
+
+* use selene for linting ([cb641d5](https://github.com/stephansama/fzf-nerdfont.nvim/commit/cb641d56400536c7bdb832569aaff8078fc3f23a))
+
 ## [2.0.0](https://github.com/stephansama/fzf-nerdfont.nvim/compare/v1.0.1...v2.0.0) (2025-10-10)
 
 
