@@ -29,6 +29,7 @@ local function set_icon(selected, bufnr, win)
     vim.cmd.quit({ bang = true })
 end
 
+---@return string[]|nil
 local function get_glyphs_file()
     local glyph_filename = vim.fn.stdpath("data") .. "/glyphnames"
 
@@ -44,12 +45,12 @@ function Main.run(scope)
     scope = scope or ""
 
     local glyphs = get_glyphs_file()
-
     if not glyphs then
-        return vim.notify(
-            "please regenerate nerdfont glyph file with :FzfNerdfont generate",
+        vim.notify(
+            "please regenerat the nerdfont glyphs file `:FzfNerdfont generate`",
             vim.log.levels.WARN
         )
+        return
     end
 
     log.debug(scope, "fzf-nerdfont enabled")
@@ -58,9 +59,8 @@ function Main.run(scope)
     local original_win = vim.api.nvim_get_current_win()
 
     local ok, fzf_lua = pcall(require, "fzf-lua")
-
     if not ok or not fzf_lua then
-        return vim.notify("not able to load fzf-lua", vim.log.levels.ERROR)
+        error("`fzf-lua` unavailable!", vim.log.levels.ERROR)
     end
 
     fzf_lua.fzf_exec(glyphs, {
@@ -77,17 +77,21 @@ function Main.run(scope)
 end
 
 function Main.generate()
+    --- NOTE: (DrKJeff16)
+    --- I'm not keen on relying on this method of finding the current script directory.
+    --- I believe doing it in Lua is a less error-prone option.
     local current_path = debug.getinfo(1, "S").source:sub(2)
-    local root = current_path:match("^(.-)/lua")
+    local root = current_path:match("^(.-)/lua") ---@type string
     local script_path = root .. "/scripts/update_glyphs.sh"
 
     local generate_glyph = vim.system({ "sh", "-c", script_path }):wait()
 
-    if generate_glyph.code ~= 0 then
-        vim.notify("Failed to generate nerdfont glyphs", vim.log.levels.ERROR)
-    else
+    if generate_glyph.code == 0 then
         vim.notify("Successfully generated nerdfont glyphs", vim.log.levels.INFO)
+        return
     end
+
+    error("Failed to generate nerdfont glyphs", vim.log.levels.ERROR)
 end
 
 return Main

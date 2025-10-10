@@ -14,7 +14,7 @@ Toggle the plugin by calling the `enable`/`disable` methods respectively.
                                                                 *_G.FzfNerdfont*
                                 `_G.FzfNerdfont`
 Class ~
-{table}
+{FzfNerdFont}
 
 
 ==============================================================================
@@ -69,6 +69,12 @@ Parameters ~
 {selected} `(string[])`
 {bufnr} `(integer)`
 {win} `(integer)`
+
+------------------------------------------------------------------------------
+                                                             *get_glyphs_file()*
+                              `get_glyphs_file`()
+Return ~
+`(string[]|nil)`
 
 ------------------------------------------------------------------------------
                                                                     *Main.run()*
