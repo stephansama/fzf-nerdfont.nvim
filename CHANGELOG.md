@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.0.0](https://github.com/stephansama/fzf-nerdfont.nvim/compare/v1.0.1...v2.0.0) (2025-10-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* **glyphnames:** install glyphnames to `stdpath('data')` instead
+
+### Features
+
+* added join_path function ([aa4fadf](https://github.com/stephansama/fzf-nerdfont.nvim/commit/aa4fadfda8bc5a2853516a1e56604bf90d0f7856))
+* removed error in favor of just setting up config for users ([6cc3266](https://github.com/stephansama/fzf-nerdfont.nvim/commit/6cc32661e1c89ed04ff4867f4a685083c238f5e7))
+
+
+### Bug Fixes
+
+* **glyphnames:** install glyphnames to `stdpath('data')` instead ([f43138f](https://github.com/stephansama/fzf-nerdfont.nvim/commit/f43138f3603c01c068e25196899a1518c51d7c05))
+* sanitized `minimal_init.lua` and added extra instructions ([02edc83](https://github.com/stephansama/fzf-nerdfont.nvim/commit/02edc8374a89e3638f4b5ff2e3c489b52821ef59))
+* **scripts:** restored `tr` usage ([b0fa34b](https://github.com/stephansama/fzf-nerdfont.nvim/commit/b0fa34b11dd08f06e62e3317b6be4a0e910c4fe0))
+* **setup:** improved quality of `setup.sh` script ([1a03337](https://github.com/stephansama/fzf-nerdfont.nvim/commit/1a03337fcd7fa7411444f06a4f7753be70d1e929))
+* use `error()` when appropriate, more annotations ([97bc209](https://github.com/stephansama/fzf-nerdfont.nvim/commit/97bc209c74c0b47e05d2b136e2738ac5e646d528))
+
 ## [1.0.1](https://github.com/stephansama/fzf-nerdfont.nvim/compare/v1.0.0...v1.0.1) (2025-10-09)
 
 
