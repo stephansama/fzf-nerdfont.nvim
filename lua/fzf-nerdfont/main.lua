@@ -92,7 +92,6 @@ function Main.generate()
     local sep = get_separator()
     local current_path = debug.getinfo(1, "S").source:sub(2)
     local pattern = "^(.-)" .. sep .. "lua"
-    vim.print(pattern)
     local root = current_path:match(pattern) ---@type string
     local script_path = root .. sep .. "scripts" .. sep .. "update_glyphs.sh"
 
