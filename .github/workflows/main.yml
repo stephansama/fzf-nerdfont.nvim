@@ -1,9 +1,12 @@
 name: main
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    types: [opened, synchronize]
+    types:
+      - opened
+      - synchronize
 env:
   LUA_LS_VERSION: 3.7.4
 concurrency:
@@ -21,6 +24,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           version: latest
           args: --check . -g '*.lua' -g '!deps/'
+      - name: Lint Lua Code With Selene
+        uses: AlejandroSuero/selene-linter-action@v1.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --display-style=quiet .
   documentation:
     name: Documentation
     runs-on: ubuntu-latest
