@@ -34,8 +34,6 @@ local function get_glyphs_file()
 
     if vim.fn.filereadable(glyph_filename) == 1 then
         return vim.fn.readfile(glyph_filename)
-    else
-        vim.notify("please regenerate nerdfont glyph file with :FzfNerdfont generate")
     end
 end
 
@@ -48,7 +46,10 @@ function Main.run(scope)
     local glyphs = get_glyphs_file()
 
     if not glyphs then
-        return
+        return vim.notify(
+            "please regenerate nerdfont glyph file with :FzfNerdfont generate",
+            vim.log.levels.WARN
+        )
     end
 
     log.debug(scope, "fzf-nerdfont enabled")
@@ -77,8 +78,8 @@ end
 
 function Main.generate()
     local current_path = debug.getinfo(1, "S").source:sub(2)
-    local base = current_path:match("^(.-)/lua")
-    local script_path = base .. "/scripts/update_glyphs.sh"
+    local root = current_path:match("^(.-)/lua")
+    local script_path = root .. "/scripts/update_glyphs.sh"
 
     local generate_glyph = vim.system({ "sh", "-c", script_path }):wait()
 
