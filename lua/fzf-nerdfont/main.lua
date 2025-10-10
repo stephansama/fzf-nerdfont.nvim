@@ -6,6 +6,14 @@ local Main = {}
 
 local _unpack = unpack or table.unpack
 
+local function get_separator()
+    if vim.fn.has("win32") == 1 then
+        return "\\"
+    else
+        return "/"
+    end
+end
+
 ---@param txt string
 ---@param bufnr integer
 ---@param win integer
@@ -31,7 +39,8 @@ end
 
 ---@return string[]|nil
 local function get_glyphs_file()
-    local glyph_filename = vim.fn.stdpath("data") .. "/glyphnames"
+    local sep = get_separator()
+    local glyph_filename = vim.fn.stdpath("data") .. sep .. "glyphnames"
 
     if vim.fn.filereadable(glyph_filename) == 1 then
         return vim.fn.readfile(glyph_filename)
@@ -80,9 +89,12 @@ function Main.generate()
     --- NOTE: (DrKJeff16)
     --- I'm not keen on relying on this method of finding the current script directory.
     --- I believe doing it in Lua is a less error-prone option.
+    local sep = get_separator()
     local current_path = debug.getinfo(1, "S").source:sub(2)
-    local root = current_path:match("^(.-)/lua") ---@type string
-    local script_path = root .. "/scripts/update_glyphs.sh"
+    local pattern = "^(.-)" .. sep .. "lua"
+    vim.print(pattern)
+    local root = current_path:match(pattern) ---@type string
+    local script_path = root .. sep .. "scripts" .. sep .. "update_glyphs.sh"
 
     local generate_glyph = vim.system({ "sh", "-c", script_path }):wait()
 
