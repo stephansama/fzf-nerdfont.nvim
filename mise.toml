@@ -1,2 +1,3 @@
 [tools]
+"pre-commit" = "latest"
 "cargo:selene" = "latest"
