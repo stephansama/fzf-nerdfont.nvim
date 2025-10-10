@@ -6,11 +6,6 @@ Class ~
 {FzfNerdFont}
 
 ------------------------------------------------------------------------------
-                                                             *FzfNerdFont.run()*
-                              `FzfNerdFont.run`()
-Toggle the plugin by calling the `enable`/`disable` methods respectively.
-
-------------------------------------------------------------------------------
                                                                 *_G.FzfNerdfont*
                                 `_G.FzfNerdfont`
 Class ~
@@ -59,6 +54,14 @@ Class ~
                                `get_separator`()
 Return ~
 "\\"|"/"
+
+------------------------------------------------------------------------------
+                                                                   *join_path()*
+                              `join_path`({path})
+Parameters ~
+{path} `(table)`
+Return ~
+`(string)`
 
 ------------------------------------------------------------------------------
                                                                  *insert_text()*
