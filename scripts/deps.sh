@@ -7,20 +7,23 @@ LUALS_URL="https://github.com/LuaLS/lua-language-server/releases/download/3.7.4/
 
 __get_mini() {
 	if ! [ -d ./deps/mini.nvim ]; then
+        printf "git clone --depth 1 https://github.com/nvim-mini/mini.nvim deps/mini.nvim\n"
 	    git clone --depth 1 https://github.com/nvim-mini/mini.nvim deps/mini.nvim || return 1
 	fi
-
 	return 0
 }
 
 __get_lua_ls() {
     if [[ -d .ci/lua-ls ]]; then
-        rm -rf .ci/lua-ls/log
+        printf "rm -rf .ci/lua-ls/log\n"
         return 0
     fi
 
+	printf "%s\n" "mkdir -p .ci/lua-ls" "curl -sL \"\$LUALS_URL\" tar xzf - -C \"\$(pwd)/.ci/lua-ls"
+
     mkdir -p .ci/lua-ls
 	curl -sL "$LUALS_URL" tar xzf - -C "$(pwd)/.ci/lua-ls"
+
     return $?
 }
 
