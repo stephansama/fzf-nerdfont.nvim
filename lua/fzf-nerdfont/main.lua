@@ -7,11 +7,7 @@ local Main = {}
 local _unpack = unpack or table.unpack
 
 local function get_separator()
-    if vim.fn.has("win32") == 1 then
-        return "\\"
-    else
-        return "/"
-    end
+    return vim.fn.has("win32") == 1 and "\\" or "/"
 end
 
 ---@param txt string
