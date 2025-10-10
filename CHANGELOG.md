@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/stephansama/fzf-nerdfont.nvim/compare/v2.1.0...v2.2.0) (2025-10-10)
+
+
+### Features
+
+* **ci:** add optional `pre-commit` for contributors ([#10](https://github.com/stephansama/fzf-nerdfont.nvim/issues/10)) ([80f5c27](https://github.com/stephansama/fzf-nerdfont.nvim/commit/80f5c27a3cf5992daa6cd2717666703bf2440407))
+
 ## [2.1.0](https://github.com/stephansama/fzf-nerdfont.nvim/compare/v2.0.0...v2.1.0) (2025-10-10)
 
 
