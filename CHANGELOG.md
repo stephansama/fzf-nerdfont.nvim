@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1](https://github.com/stephansama/fzf-nerdfont.nvim/compare/v2.2.0...v2.2.1) (2025-10-10)
+
+
+### Bug Fixes
+
+* improved `Makefile` ([#14](https://github.com/stephansama/fzf-nerdfont.nvim/issues/14)) ([6cadbfa](https://github.com/stephansama/fzf-nerdfont.nvim/commit/6cadbfa4b3e24b5d2df3f234481c2181998c829e))
+
 ## [2.2.0](https://github.com/stephansama/fzf-nerdfont.nvim/compare/v2.1.0...v2.2.0) (2025-10-10)
 
 
