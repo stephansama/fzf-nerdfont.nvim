@@ -16,10 +16,12 @@ repos:
         name: Run Linters
         language: system
         entry: make lint
+        files: '^(plugin|lua)/.*\.lua$'
         verbose: true
 
       - id: make_docs
         name: Generate Docs
         language: system
         entry: make documentation-ci
+        files: '^(plugin|lua)/.*\.lua$'
         verbose: true
