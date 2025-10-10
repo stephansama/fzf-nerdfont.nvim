@@ -6,6 +6,7 @@ local Main = {}
 
 local _unpack = unpack or table.unpack
 
+---@return "\\"|"/"
 local function get_separator()
     return vim.fn.has("win32") == 1 and "\\" or "/"
 end

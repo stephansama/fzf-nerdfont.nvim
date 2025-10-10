@@ -8,6 +8,7 @@ Main	fzf-nerdfont.txt	/*Main*
 Main.run()	fzf-nerdfont.txt	/*Main.run()*
 _G.FzfNerdfont	fzf-nerdfont.txt	/*_G.FzfNerdfont*
 get_glyphs_file()	fzf-nerdfont.txt	/*get_glyphs_file()*
+get_separator()	fzf-nerdfont.txt	/*get_separator()*
 insert_text()	fzf-nerdfont.txt	/*insert_text()*
 log	fzf-nerdfont.txt	/*log*
 log.debug()	fzf-nerdfont.txt	/*log.debug()*
