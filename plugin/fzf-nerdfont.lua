@@ -1,4 +1,3 @@
--- You can use this loaded variable to enable conditional parts of your plugin.
 if vim.g.fzf_nerd_font_loaded == 1 then
     return
 end
