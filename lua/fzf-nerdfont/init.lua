@@ -16,6 +16,14 @@ end
 -- setup FzfNerdFont options and merge them with user provided ones.
 FzfNerdFont.setup = config.setup
 
+function FzfNerdFont.generate()
+    if vim.g.fzf_nerd_font_setup ~= 1 then
+        return
+    end
+
+    main.generate()
+end
+
 ---@class table
 _G.FzfNerdfont = FzfNerdFont
 
