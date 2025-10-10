@@ -1,6 +1,5 @@
 local log = require("fzf-nerdfont.util.log")
 
--- internal methods
 ---@class FzfNerdFont.Main
 local Main = {}
 
@@ -9,6 +8,21 @@ local _unpack = unpack or table.unpack
 ---@return "\\"|"/"
 local function get_separator()
     return vim.fn.has("win32") == 1 and "\\" or "/"
+end
+
+---@param path table
+---@return string
+local function join_path(path)
+    local sep = get_separator()
+    local str = ""
+    for index, curr in ipairs(path) do
+        if index == 1 then
+            str = curr
+        else
+            str = str .. sep .. curr
+        end
+    end
+    return str
 end
 
 ---@param txt string
@@ -36,8 +50,7 @@ end
 
 ---@return string[]|nil
 local function get_glyphs_file()
-    local sep = get_separator()
-    local glyph_filename = vim.fn.stdpath("data") .. sep .. "glyphnames"
+    local glyph_filename = join_path({ vim.fn.stdpath("data"), "glyphnames" })
 
     if vim.fn.filereadable(glyph_filename) == 1 then
         return vim.fn.readfile(glyph_filename)
@@ -83,15 +96,10 @@ function Main.run(scope)
 end
 
 function Main.generate()
-    --- NOTE: (DrKJeff16)
-    --- I'm not keen on relying on this method of finding the current script directory.
-    --- I believe doing it in Lua is a less error-prone option.
-    local sep = get_separator()
     local current_path = debug.getinfo(1, "S").source:sub(2)
-    local pattern = "^(.-)" .. sep .. "lua"
+    local pattern = join_path({ "^(.-)", "lua" })
     local root = current_path:match(pattern) ---@type string
-    local script_path = root .. sep .. "scripts" .. sep .. "update_glyphs.sh"
-
+    local script_path = join_path({ root, "scripts", "update_glyphs.sh" })
     local generate_glyph = vim.system({ "sh", "-c", script_path }):wait()
 
     if generate_glyph.code == 0 then
