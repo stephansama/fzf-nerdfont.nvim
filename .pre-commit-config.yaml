@@ -19,6 +19,6 @@ repos:
       - id: make_docs
         name: Generate Docs
         language: system
-        entry: make documentation-ci
+        entry: make documentation
         files: '^(plugin|lua)/.*\.lua$'
         verbose: true

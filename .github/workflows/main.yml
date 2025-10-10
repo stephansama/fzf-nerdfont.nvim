@@ -43,7 +43,7 @@ jobs:
           neovim: true
           version: v0.11.3
       - name: Generate Docs
-        run: make documentation-ci
+        run: make documentation
       - name: Check Docs Diff
         run: exit $(git status --porcelain doc | wc -l | tr -d " ")
   tests:
@@ -77,9 +77,9 @@ jobs:
         run: |
           export PATH="${PWD}/.ci/lua-ls/bin:${PATH}"
           nvim --version
-          make luals-ci
+          make luals
       - name: Run Tests
-        run: make test-ci
+        run: make test
   tests-nightly:
     name: Test on Neovim Nightly
     runs-on: ubuntu-latest
@@ -115,9 +115,9 @@ jobs:
         run: |
           export PATH="${PWD}/.ci/lua-ls/bin:${PATH}"
           nvim --version
-          make luals-ci
+          make luals
       - name: Run Tests
-        run: make test-ci
+        run: make test
   release:
     name: Release
     if: ${{ github.ref == 'refs/heads/main' }}
