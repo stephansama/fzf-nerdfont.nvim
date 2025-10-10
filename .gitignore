@@ -1,3 +1,5 @@
 deps
 **.DS_Store
 .ci
+
+glyphnames

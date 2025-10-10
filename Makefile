@@ -51,7 +51,7 @@ luals:
 	make luals-ci
 
 update_glyphs:
-	sh ./scripts/update_glyphs.sh
+	./scripts/update_glyphs.sh
 
 # setup
 setup:

@@ -6,15 +6,10 @@ Class ~
 {FzfNerdFont}
 
 ------------------------------------------------------------------------------
-                                                             *FzfNerdFont.run()*
-                              `FzfNerdFont.run`()
-Toggle the plugin by calling the `enable`/`disable` methods respectively.
-
-------------------------------------------------------------------------------
                                                                 *_G.FzfNerdfont*
                                 `_G.FzfNerdfont`
 Class ~
-{table}
+{FzfNerdFont}
 
 
 ==============================================================================
@@ -55,6 +50,20 @@ Class ~
 {FzfNerdFont.Main}
 
 ------------------------------------------------------------------------------
+                                                               *get_separator()*
+                               `get_separator`()
+Return ~
+"\\"|"/"
+
+------------------------------------------------------------------------------
+                                                                   *join_path()*
+                              `join_path`({path})
+Parameters ~
+{path} `(table)`
+Return ~
+`(string)`
+
+------------------------------------------------------------------------------
                                                                  *insert_text()*
                       `insert_text`({txt}, {bufnr}, {win})
 Parameters ~
@@ -69,6 +78,12 @@ Parameters ~
 {selected} `(string[])`
 {bufnr} `(integer)`
 {win} `(integer)`
+
+------------------------------------------------------------------------------
+                                                             *get_glyphs_file()*
+                              `get_glyphs_file`()
+Return ~
+`(string[]|nil)`
 
 ------------------------------------------------------------------------------
                                                                     *Main.run()*

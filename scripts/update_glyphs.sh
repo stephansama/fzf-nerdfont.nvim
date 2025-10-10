@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
-output="lua/fzf-nerdfont/glyphnames"
+set -o pipefail
 
-rm "$output"
+# OUTPUT="lua/fzf-nerdfont/glyphnames"
+OUTPUT="$(nvim --headless --clean -c 'echo stdpath("data")' -c 'qa!' 2>&1)/glyphnames"
 
-curl -s https://raw.githubusercontent.com/ryanoasis/nerd-fonts/refs/heads/master/glyphnames.json |
-	jq 'to_entries | map([.key, .value.char]) | del(.[0]) | .[] | reverse | join(" ")' |
-	tr -d '"' >"$output"
+rm -f "$OUTPUT"
+
+curl -s 'https://raw.githubusercontent.com/ryanoasis/nerd-fonts/refs/heads/master/glyphnames.json' \
+    | jq 'to_entries | map([.key, .value.char]) | del(.[0]) | .[] | reverse | join(" ")' \
+    | tr -d '"' >| "$OUTPUT"

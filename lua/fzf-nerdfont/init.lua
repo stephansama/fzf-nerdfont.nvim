@@ -4,19 +4,25 @@ local config = require("fzf-nerdfont.config")
 ---@class FzfNerdFont
 local FzfNerdFont = {}
 
---- Toggle the plugin by calling the `enable`/`disable` methods respectively.
+FzfNerdFont.setup = config.setup
+
 function FzfNerdFont.run()
     if vim.g.fzf_nerd_font_setup ~= 1 then
-        return
+        config.setup()
     end
 
     main.run("public_api_toggle")
 end
 
--- setup FzfNerdFont options and merge them with user provided ones.
-FzfNerdFont.setup = config.setup
+function FzfNerdFont.generate()
+    if vim.g.fzf_nerd_font_setup ~= 1 then
+        config.setup()
+    end
 
----@class table
+    main.generate()
+end
+
+---@class FzfNerdFont
 _G.FzfNerdfont = FzfNerdFont
 
 return FzfNerdFont

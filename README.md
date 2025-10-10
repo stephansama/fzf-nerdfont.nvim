@@ -11,7 +11,20 @@ while you edit.
 
 </div>
 
-## 📋 Installation
+## ☄ Getting started
+
+This plugin provides a command `FzfNerdFont` that opens a `fzf-lua` window
+with a list of Nerd Font icons.
+You can search for an icon and press enter to insert it into the current buffer.
+
+### Prerequisites
+
+- [`fzf`](https://github.com/junegunn/fzf)
+- [`jq`](https://github.com/jqlang/jq)
+- [`make`](https://www.gnu.org/software/make/)
+- [`neovim >0.11`](https://github.com/neovim/neovim)
+
+### 📋 Installation
 
 Using [`lazy.nvim`](https://github.com/folke/lazy.nvim):
 
@@ -21,6 +34,7 @@ require("lazy").setup({
       {
         "stephansama/fzf-nerdfont.nvim",
         lazy = true,
+        build = ":FzfNerdfont generate",
         dependencies = { "ibhagwan/fzf-lua" },
         cmd = "FzfNerdfont",
         keys = {
@@ -30,12 +44,6 @@ require("lazy").setup({
     }
 })
 ```
-
-## ☄ Getting started
-
-This plugin provides a command `FzfNerdFont` that opens a `fzf-lua` window
-with a list of Nerd Font icons.
-You can search for an icon and press enter to insert it into the current buffer.
 
 ## ⚙ Configuration
 
@@ -57,7 +65,8 @@ require("fzf-nerdfont").setup({
 
 |   Command   |         Description        |
 |-------------|----------------------------|
-|  `:FzfNerdFont`  |     Shows the Nerd Font icon list with fzf-lua.    |
+|  `:FzfNerdfont`  |     Shows the Nerd Font icon list with fzf-lua.    |
+|  `:FzfNerdfont generate`  |     Generates the Nerd Font icon list.    |
 
 ---
 
