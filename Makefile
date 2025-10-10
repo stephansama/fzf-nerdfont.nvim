@@ -6,11 +6,14 @@
 
 all: documentation lint luals test
 
+deps: deps/mini deps/luals
+
 # installs `mini.nvim` and LuaLS.
-deps:
-	@mkdir -p .ci/lua-ls
-	curl -sL "https://github.com/LuaLS/lua-language-server/releases/download/3.7.4/lua-language-server-3.7.4-darwin-x64.tar.gz" | tar xzf - -C "${PWD}/.ci/lua-ls"
-	[ -d ./deps/mini.nvim ] || git clone --depth 1 https://github.com/nvim-mini/mini.nvim ./deps/mini.nvim
+deps/mini:
+	./scripts/deps.sh mini
+
+deps/luals:
+	./scripts/deps.sh luals
 
 # runs all the test files.
 test: deps
@@ -45,7 +48,6 @@ lint:
 	selene plugin/ lua/
 
 luals: deps
-	rm -rf .ci/lua-ls/log
 	lua-language-server --configpath .luarc.json --logpath .ci/lua-ls/log --check .
 	[ -f .ci/lua-ls/log/check.json ] && { cat .ci/lua-ls/log/check.json 2>/dev/null; exit 1; } || true
 
