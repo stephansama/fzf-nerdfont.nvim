@@ -58,7 +58,7 @@ __get_lua_ls() {
 
 if [[ $# -eq 0 ]]; then
     __get_mini || die 1 "Mini installation failed!"
-    __get_lua_ls || die 1 "LuaLS fnstallation failed!"
+    __get_lua_ls || die 1 "LuaLS installation failed!"
     die 0
 fi
 
@@ -67,5 +67,5 @@ DEP="$1"
 case "$DEP" in
     [Mm][Ii][Nn][Ii]) __get_mini; die $? ;;
     [Ll][Uu][Aa][Ll][Ss]) __get_lua_ls; die $?  ;;
-    *) die $? "Bad argument \`${DEP}\`" ;;
+    *) die 1 "Bad argument \`${DEP}\`" ;;
 esac
