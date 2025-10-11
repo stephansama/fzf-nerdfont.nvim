@@ -20,7 +20,7 @@ FzfNerdConfig.defaults = {
     glyphs_dir = vim.fn.stdpath("data"),
 }
 
---- @type FzfNerdFont.options
+--- @class FzfNerdFont.options
 FzfNerdConfig.options = {}
 
 --- Defines your `fzf-nerdfont` setup.
