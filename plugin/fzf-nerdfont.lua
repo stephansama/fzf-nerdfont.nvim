@@ -4,12 +4,13 @@ end
 
 vim.g.fzf_nerd_font_loaded = 1
 
-vim.api.nvim_create_user_command("FzfNerdfont", function(opts)
-    if opts.args == "generate" then
+vim.api.nvim_create_user_command("FzfNerdfont", function(ctx)
+    if ctx.args == "generate" then
         require("fzf-nerdfont").generate()
-    else
-        require("fzf-nerdfont").run()
+        return
     end
+
+    require("fzf-nerdfont").run()
 end, {
     nargs = "?",
     complete = function()

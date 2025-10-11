@@ -2,88 +2,81 @@
 ------------------------------------------------------------------------------
                                                                    *FzfNerdFont*
                                  `FzfNerdFont`
-Class ~
-{FzfNerdFont}
+@class FzfNerdFont
 
 ------------------------------------------------------------------------------
                                                                 *_G.FzfNerdfont*
                                 `_G.FzfNerdfont`
-Class ~
-{FzfNerdFont}
+@class FzfNerdFont
 
 
 ==============================================================================
 ------------------------------------------------------------------------------
                                                                  *FzfNerdConfig*
                                 `FzfNerdConfig`
-Class ~
-{FzfNerdFont.Config}
+@class FzfNerdFont.Config
 
 ------------------------------------------------------------------------------
                                                         *FzfNerdConfig.defaults*
                             `FzfNerdConfig.defaults`
 `FzfNerdfont` options spec.
 
-Class ~
-{FzfNerdFont.options}
+@class FzfNerdFont.options
 
 ------------------------------------------------------------------------------
                                                          *FzfNerdConfig.options*
                             `FzfNerdConfig.options`
-Type ~
-`(FzfNerdFont.options)`
+@type FzfNerdFont.options
 
 ------------------------------------------------------------------------------
                                                          *FzfNerdConfig.setup()*
                         `FzfNerdConfig.setup`({options})
 Defines your `fzf-nerdfont` setup.
 
-Parameters ~
-{options} `(optional)` `(FzfNerdFont.options)` Module config table. See |FzfNerdfont.options|.
+@param options? FzfNerdFont.options Module config table. See |FzfNerdfont.options|.
 
 
 ==============================================================================
 ------------------------------------------------------------------------------
                                                                           *Main*
                                      `Main`
-Class ~
-{FzfNerdFont.Main}
+@class FzfNerdFont.Main
 
 ------------------------------------------------------------------------------
                                                                *get_separator()*
                                `get_separator`()
-Return ~
-"\\"|"/"
+Set the path separator depending on whether the user's in a Windows OS or not.
+
+@return "\\"|"/"
 
 ------------------------------------------------------------------------------
                                                                    *join_path()*
                               `join_path`({path})
-Parameters ~
-{path} `(table)`
-Return ~
-`(string)`
+@param path string[]
+@return string str
 
 ------------------------------------------------------------------------------
                                                                  *insert_text()*
                       `insert_text`({txt}, {bufnr}, {win})
-Parameters ~
-{txt} `(string)`
-{bufnr} `(integer)`
-{win} `(integer)`
+@param txt string
+@param bufnr integer
+@param win integer
 
 ------------------------------------------------------------------------------
                                                                     *set_icon()*
                      `set_icon`({selected}, {bufnr}, {win})
-Parameters ~
-{selected} `(string[])`
-{bufnr} `(integer)`
-{win} `(integer)`
+Sets the icon in the target buffer.
+
+@param selected string[]
+@param bufnr integer
+@param win integer
 
 ------------------------------------------------------------------------------
                                                              *get_glyphs_file()*
                               `get_glyphs_file`()
-Return ~
-`(string[]|nil)`
+Retrieve the location of the glyphs file.
+
+@return string[]|nil
 
 ------------------------------------------------------------------------------
                                                                     *Main.run()*
@@ -92,60 +85,61 @@ Initializes the plugin, sets event listeners and internal state.
 
 @param scope? string: internal identifier for logging purposes.
 
+------------------------------------------------------------------------------
+                                                               *Main.generate()*
+                               `Main.generate`()
+Generates the `glyphnames` file.
+
 
 ==============================================================================
 ------------------------------------------------------------------------------
                                                                          *state*
                                     `state`
-Class ~
-{FzfNerdFont.State}
-Fields ~
-{enabled} `(optional)` `(boolean)`
+@class FzfNerdFont.State
+@field enabled? boolean
 
 ------------------------------------------------------------------------------
                                                                    *state.new()*
                                  `state.new`()
-the state to its original value.
+Sets the state to its original value.
 
 
 ==============================================================================
 ------------------------------------------------------------------------------
                                                                            *log*
                                      `log`
-Class ~
-{FzfNerdfont.Log}
-Fields ~
-{enabled} `(optional)` `(boolean)`
+@class FzfNerdfont.Log
+@field enabled? boolean
 
 ------------------------------------------------------------------------------
                                                                    *log.debug()*
                        `log.debug`({scope}, {str}, {...})
-prints only if debug is true.
+Runs only if `debug` is enabled.
 
-Parameters ~
-{scope} `(string)`: the scope from where this function is called.
-{str} `(string)`: the formatted string.
-{...} `(any)`: the arguments of the formatted string.
+@param scope string: the scope from where this function is called.
+@param str string: the formatted string.
+@param ... any: the arguments of the formatted string.
 
 ------------------------------------------------------------------------------
                                                                   *log.notify()*
             `log.notify`({scope}, {level}, {verbose}, {str}, {...})
-prints only if debug is true.
+Notifies the user.
 
-Parameters ~
-{scope} `(string)`: the scope from where this function is called.
-{level} `(integer)`: the log level of vim.notify.
-{verbose} `(boolean)`: when false, only prints when config.debug is true.
-{str} `(string)`: the formatted string.
-{...} `(any)`: the arguments of the formatted string.
+Runs only if `debug` is enabled.
+
+@param scope string: the scope from where this function is called.
+@param level integer: the log level of vim.notify.
+@param verbose boolean: when false, only prints when config.debug is true.
+@param str string: the formatted string.
+@param ... any: the arguments of the formatted string.
 
 ------------------------------------------------------------------------------
                                                         *log.warn_deprecation()*
                        `log.warn_deprecation`({options})
-analyzes the user provided `setup` parameters and sends a message if they use a deprecated option, then gives the new option to use.
+Analyzes the user provided `setup` parameters and
+sends a message if they use a deprecated option, then gives the new option to use.
 
-Parameters ~
-{options} `(table)`: the options provided by the user.
+@param options table: the options provided by the user.
 
 
  vim:tw=78:ts=8:noet:ft=help:norl:

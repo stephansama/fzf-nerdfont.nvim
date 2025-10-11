@@ -1,25 +1,27 @@
----@class FzfNerdfont.Log
----@field enabled? boolean
+--- @class FzfNerdfont.Log
+--- @field enabled? boolean
 local log = {}
 
 local MAX_SCOPE = 15
 
---- prints only if debug is true.
+--- Runs only if `debug` is enabled.
 ---
----@param scope string: the scope from where this function is called.
----@param str string: the formatted string.
----@param ... any: the arguments of the formatted string.
+--- @param scope string: the scope from where this function is called.
+--- @param str string: the formatted string.
+--- @param ... any: the arguments of the formatted string.
 function log.debug(scope, str, ...)
     return log.notify(scope, vim.log.levels.DEBUG, false, str, ...)
 end
 
---- prints only if debug is true.
+--- Notifies the user.
 ---
----@param scope string: the scope from where this function is called.
----@param level integer: the log level of vim.notify.
----@param verbose boolean: when false, only prints when config.debug is true.
----@param str string: the formatted string.
----@param ... any: the arguments of the formatted string.
+--- Runs only if `debug` is enabled.
+---
+--- @param scope string: the scope from where this function is called.
+--- @param level integer: the log level of vim.notify.
+--- @param verbose boolean: when false, only prints when config.debug is true.
+--- @param str string: the formatted string.
+--- @param ... any: the arguments of the formatted string.
 function log.notify(scope, level, verbose, str, ...)
     if not (verbose and log.enabled) or vim.g.fzf_nerd_font_setup ~= 1 then
         return
@@ -41,9 +43,10 @@ function log.notify(scope, level, verbose, str, ...)
     )
 end
 
---- analyzes the user provided `setup` parameters and sends a message if they use a deprecated option, then gives the new option to use.
+--- Analyzes the user provided `setup` parameters and
+--- sends a message if they use a deprecated option, then gives the new option to use.
 ---
----@param options table: the options provided by the user.
+--- @param options table: the options provided by the user.
 function log.warn_deprecation(options)
     local uses_deprecated_option = false
     local notice = "is now deprecated, use `%s` instead."
