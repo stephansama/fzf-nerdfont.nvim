@@ -58,19 +58,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-      - uses: jdx/mise-action@v2
-        with:
-          version: latest
-          install: true # [default: true] run `mise install`
-          cache: true
-          experimental: false
-          mise_toml: |
-            [tools]
-            "pre-commit" = "latest"
-            "cargo:selene" = "latest"
-            "bob" = "4.1.2"
       - run: date +%F > todays-date
-      - name: restore luals cache
+      - name: Restore LuaLS Cache
         uses: actions/cache@v4
         id: cache
         with:
