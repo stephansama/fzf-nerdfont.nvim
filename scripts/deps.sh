@@ -2,6 +2,13 @@
 
 # set -x
 
+# Print args to `/dev/stderr`.
+error() {
+    local TXT=("$@")
+    printf "%s\n" "${TXT[@]}" >&2
+    return 0
+}
+
 # Kill the execution. By default it exits with code `0`.
 # Usage: `die [[N] [[text] [...]]]`
 die() {
