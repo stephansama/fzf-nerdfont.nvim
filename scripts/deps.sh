@@ -8,7 +8,7 @@ LUALS_URL="https://github.com/LuaLS/lua-language-server/releases/download/3.7.4/
 __get_mini() {
     if ! [ -d ./deps/mini.nvim ]; then
         printf "git clone --depth 1 https://github.com/nvim-mini/mini.nvim deps/mini.nvim\n"
-        git clone --depth 1 https://github.com/nvim-mini/mini.nvim deps/mini.nvim
+        git clone --depth 1 https://github.com/nvim-mini/mini.nvim deps/mini.nvim || return 1
     fi
     return 0
 }
