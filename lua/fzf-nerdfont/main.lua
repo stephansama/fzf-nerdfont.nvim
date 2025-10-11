@@ -19,7 +19,11 @@ local function join_path(path)
     local sep = get_separator()
     local str = ""
     for i, val in ipairs(path) do
-        str = i == 1 and val or (str .. sep .. val)
+        if i == 1 then
+            str = val
+        else
+            str = str .. sep .. val
+        end
     end
 
     return str
@@ -44,6 +48,10 @@ end
 --- @param bufnr integer
 --- @param win integer
 local function set_icon(selected, bufnr, win)
+    if not selected or vim.tbl_isempty(selected) then
+        return
+    end
+
     for _, f in ipairs(selected) do
         insert_text(f, bufnr, win)
     end
