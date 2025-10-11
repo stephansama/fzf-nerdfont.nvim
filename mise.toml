@@ -1,3 +1,4 @@
 [tools]
 "pre-commit" = "latest"
 "cargo:selene" = "latest"
+"bob" = "4.1.2"
