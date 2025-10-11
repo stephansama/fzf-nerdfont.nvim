@@ -32,6 +32,7 @@ clean:
 
 # installs deps, then generates documentation.
 documentation:
+	./scripts/deps.sh mini
 	nvim --headless --noplugin -u ./scripts/minimal_init.lua \
 		-c "lua require('mini.doc').generate()" \
 		-c "qa!"
