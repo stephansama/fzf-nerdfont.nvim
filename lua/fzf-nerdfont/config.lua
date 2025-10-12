@@ -1,27 +1,44 @@
 local log = require("fzf-nerdfont.util.log")
 
----@class FzfNerdFont.Config
+--- @class FzfNerdFont.Config
 local FzfNerdConfig = {}
 
 --- `FzfNerdfont` options spec.
 ---
----@class FzfNerdFont.options
+--- @class FzfNerdFont.options
 FzfNerdConfig.defaults = {
-    -- Prints useful logs about what event are triggered
-    -- and reasons for which actions are executed.
-    ---@type boolean
+    --- Prints useful logs about what event are triggered
+    --- and reasons for which actions are executed.
+    ---
+    --- @type boolean
     debug = false,
+
+    --- Sets the location in which the `glyphnames` file will
+    --- be saved at.
+    ---
+    --- @type string
+    glyphs_dir = vim.fn.stdpath("data"),
 }
 
----@type FzfNerdFont.options
+--- @class FzfNerdFont.options
 FzfNerdConfig.options = {}
 
 --- Defines your `fzf-nerdfont` setup.
 ---
----@param options? FzfNerdFont.options Module config table. See |FzfNerdfont.options|.
+--- @param options? FzfNerdFont.options Module config table. See |FzfNerdfont.options|.
 function FzfNerdConfig.setup(options)
-    options = options or {}
-    FzfNerdConfig.options = vim.tbl_deep_extend("keep", options, FzfNerdConfig.defaults)
+    FzfNerdConfig.options = vim.tbl_deep_extend("keep", options or {}, FzfNerdConfig.defaults)
+
+    if vim.fn.isdirectory(FzfNerdConfig.options.glyphs_dir) ~= 1 then
+        vim.notify(
+            ("`%s` is not a valid directory. Reverting back to the default."):format(
+                FzfNerdConfig.options.glyphs_dir
+            ),
+            vim.log.levels.WARN
+        )
+
+        FzfNerdConfig.options.glyphs_dir = FzfNerdConfig.defaults.glyphs_dir
+    end
 
     log.enabled = FzfNerdConfig.options.debug
     log.warn_deprecation(FzfNerdConfig.options)

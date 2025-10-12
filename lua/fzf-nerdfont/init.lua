@@ -1,7 +1,7 @@
 local main = require("fzf-nerdfont.main")
 local config = require("fzf-nerdfont.config")
 
----@class FzfNerdFont
+--- @class FzfNerdFont
 local FzfNerdFont = {}
 
 FzfNerdFont.setup = config.setup
@@ -22,7 +22,7 @@ function FzfNerdFont.generate()
     main.generate()
 end
 
----@class FzfNerdFont
+--- @class FzfNerdFont
 _G.FzfNerdfont = FzfNerdFont
 
 return FzfNerdFont
