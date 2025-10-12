@@ -83,7 +83,7 @@ Retrieve the location of the glyphs file.
                               `Main.run`({scope})
 Initializes the plugin, sets event listeners and internal state.
 
-@param scope? string: internal identifier for logging purposes.
+@param scope string|nil: internal identifier for logging purposes.
 
 ------------------------------------------------------------------------------
                                                                *Main.generate()*

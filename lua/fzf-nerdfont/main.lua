@@ -70,7 +70,7 @@ end
 
 --- Initializes the plugin, sets event listeners and internal state.
 ---
---- @param scope? string: internal identifier for logging purposes.
+--- @param scope string|nil: internal identifier for logging purposes.
 function Main.run(scope)
     scope = scope or ""
 
