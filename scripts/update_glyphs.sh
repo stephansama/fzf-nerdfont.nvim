@@ -2,7 +2,8 @@
 
 set -o pipefail
 
-OUTPUT="${GLYPHS_DIR}/glyphnames"
+DEFAULT_DIR="$(nvim --headless --clean -c 'echo stdpath("data")' -c 'qa!' 2>&1)"
+OUTPUT="${GLYPHS_DIR:-${DEFAULT_DIR}}/glyphnames"
 
 rm -f "$OUTPUT"
 
