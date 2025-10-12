@@ -4,11 +4,14 @@ end
 
 vim.g.fzf_nerd_font_loaded = 1
 
-local generate_completions = function()
-    local completions = {}
+local completions
 
-    for key, _ in pairs(require("fzf-nerdfont.main")) do
-        completions[#completions + 1] = key
+local generate_completions = function()
+    if not completions then
+        completions = {}
+        for key, _ in pairs(require("fzf-nerdfont.main")) do
+            completions[#completions + 1] = key
+        end
     end
 
     return completions
