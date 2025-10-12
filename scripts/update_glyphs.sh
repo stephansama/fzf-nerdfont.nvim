@@ -3,7 +3,7 @@
 set -o pipefail
 
 function get_default_dir() {
-	nvim --headless --clean -c 'echo stdpath("data")' -c 'qa!' 2>&1
+	nvim --headless --clean -c 'echo stdpath("data") . "/fzf-nerdfont"' -c 'qa!' 2>&1
 }
 
 OUTPUT="${GLYPHS_DIR:-$(get_default_dir)}/glyphnames"
