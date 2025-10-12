@@ -76,7 +76,8 @@ function Main.run(scope)
 
     local ok, fzf_lua = pcall(require, "fzf-lua")
     if not (ok and fzf_lua) then
-        error("`fzf-lua` unavailable!", vim.log.levels.ERROR)
+        vim.notify("`fzf-lua` unavailable!", vim.log.levels.ERROR, { title = "FzfNerdFont" })
+        return
     end
 
     local glyphs = get_glyphs_file()
