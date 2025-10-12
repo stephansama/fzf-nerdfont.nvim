@@ -14,15 +14,15 @@ local function get_separator()
 end
 
 --- @param path string[]
---- @return string str
 local function join_path(path)
     local sep = get_separator()
     local str = ""
-    for i, val in ipairs(path) do
-        if i == 1 then
-            str = val
+
+    for index, curr in ipairs(path) do
+        if index == 1 then
+            str = curr
         else
-            str = str .. sep .. val
+            str = str .. sep .. curr
         end
     end
 

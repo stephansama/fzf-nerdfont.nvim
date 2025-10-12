@@ -53,7 +53,6 @@ Set the path separator depending on whether the user's in a Windows OS or not.
                                                                    *join_path()*
                               `join_path`({path})
 @param path string[]
-@return string str
 
 ------------------------------------------------------------------------------
                                                                  *insert_text()*
