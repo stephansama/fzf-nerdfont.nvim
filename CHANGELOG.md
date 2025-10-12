@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/stephansama/fzf-nerdfont.nvim/compare/v2.2.1...v2.3.0) (2025-10-12)
+
+
+### Features
+
+* added delete glyphname function to plugin ([#18](https://github.com/stephansama/fzf-nerdfont.nvim/issues/18)) ([07d6581](https://github.com/stephansama/fzf-nerdfont.nvim/commit/07d658161c1a4031e6babe898a28c9f4e6471011))
+
 ## [2.2.1](https://github.com/stephansama/fzf-nerdfont.nvim/compare/v2.2.0...v2.2.1) (2025-10-10)
 
 

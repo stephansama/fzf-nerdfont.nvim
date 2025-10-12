@@ -67,6 +67,8 @@ require("fzf-nerdfont").setup({
 |-------------|----------------------------|
 |  `:FzfNerdfont`  |     Shows the Nerd Font icon list with fzf-lua.    |
 |  `:FzfNerdfont generate`  |     Generates the Nerd Font icon list.    |
+|  `:FzfNerdfont delete`  |     Deletes the generated Nerd Font icon list.    |
+|  `:FzfNerdfont run`  |     Shows the Nerd Font icon list with fzf-lua (same as no arguments).    |
 
 ---
 
