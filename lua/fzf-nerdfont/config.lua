@@ -33,7 +33,8 @@ function FzfNerdConfig.setup(options)
         vim.notify(
             ("`%s` is not a valid directory. Reverting back to the default."):format(
                 FzfNerdConfig.options.glyphs_dir
-            )
+            ),
+            vim.log.levels.WARN
         )
 
         FzfNerdConfig.options.glyphs_dir = FzfNerdConfig.defaults.glyphs_dir
