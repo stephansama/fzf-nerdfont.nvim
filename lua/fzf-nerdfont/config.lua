@@ -1,44 +1,31 @@
 local log = require("fzf-nerdfont.util.log")
+local fs = require("fzf-nerdfont.util.fs")
 
 --- @class FzfNerdFont.Config
 local FzfNerdConfig = {}
 
---- `FzfNerdfont` options spec.
----
---- @class FzfNerdFont.options
-FzfNerdConfig.defaults = {
-    --- Prints useful logs about what event are triggered
-    --- and reasons for which actions are executed.
-    ---
-    --- @type boolean
-    debug = false,
+---@class FzfNerdFontOpts
+---@field debug boolean Prints useful logs about what events are triggered
+---@field glyphs_dir string Sets the location in which the `glyphnames` file will be saved at.
+---@field prompt string Sets the prompt used for the fzf-lua command
 
-    --- Sets the location in which the `glyphnames` file will
-    --- be saved at.
-    ---
-    --- @type string
-    glyphs_dir = vim.fn.stdpath("data"),
+--- @class FzfNerdFontOpts
+FzfNerdConfig.defaults = {
+    debug = false,
+    glyphs_dir = fs.join_path({ vim.fn.stdpath("data"), "fzf-nerdfont" }),
+    prompt = "Select Icon>",
 }
 
---- @class FzfNerdFont.options
+--- @class FzfNerdFontOpts
 FzfNerdConfig.options = {}
 
 --- Defines your `fzf-nerdfont` setup.
 ---
---- @param options? FzfNerdFont.options Module config table. See |FzfNerdfont.options|.
+--- @param options? FzfNerdFontOpts Module config table. See |FzfNerdfont.options|.
 function FzfNerdConfig.setup(options)
     FzfNerdConfig.options = vim.tbl_deep_extend("keep", options or {}, FzfNerdConfig.defaults)
 
-    if vim.fn.isdirectory(FzfNerdConfig.options.glyphs_dir) ~= 1 then
-        vim.notify(
-            ("`%s` is not a valid directory. Reverting back to the default."):format(
-                FzfNerdConfig.options.glyphs_dir
-            ),
-            vim.log.levels.WARN
-        )
-
-        FzfNerdConfig.options.glyphs_dir = FzfNerdConfig.defaults.glyphs_dir
-    end
+    vim.fn.mkdir(FzfNerdConfig.options.glyphs_dir, "p")
 
     log.enabled = FzfNerdConfig.options.debug
     log.warn_deprecation(FzfNerdConfig.options)
