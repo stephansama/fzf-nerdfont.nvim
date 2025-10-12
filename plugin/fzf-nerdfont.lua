@@ -18,9 +18,13 @@ vim.api.nvim_create_user_command("FzfNerdfont", function(ctx)
     local fzf_nerdfont = require("fzf-nerdfont")
     local selected = fzf_nerdfont[ctx.args]
 
-    if selected ~= nil then
-        return selected()
+    if ctx.args == "" then
+        return fzf_nerdfont.run()
     end
 
-    fzf_nerdfont.run()
+    if selected ~= nil then
+        return selected()
+    else
+        vim.notify(("Invalid argument: '%s'"):format(ctx.args), vim.log.levels.ERROR)
+    end
 end, { nargs = "?", complete = generate_completions })

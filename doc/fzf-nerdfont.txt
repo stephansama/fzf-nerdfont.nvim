@@ -92,13 +92,13 @@ Sets the state to its original value.
 
 ==============================================================================
 ------------------------------------------------------------------------------
-                                                             *M.get_separator()*
-                              `M.get_separator`()
+                                                            *fs.get_separator()*
+                              `fs.get_separator`()
 @return "\\"|"/"
 
 ------------------------------------------------------------------------------
-                                                                 *M.join_path()*
-                             `M.join_path`({path})
+                                                                *fs.join_path()*
+                             `fs.join_path`({path})
 @param path string[]
 
 

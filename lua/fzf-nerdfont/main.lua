@@ -85,6 +85,7 @@ function Main.delete()
         local filename = fs.join_path({ config.options.glyphs_dir, "glyphnames" })
         if vim.fn.filereadable(filename) == 1 then
             vim.fn.delete(filename)
+            vim.notify("Successfully deleted glyphs file.", vim.log.levels.INFO)
         else
             vim.notify("Unable to find glyphs file", vim.log.levels.ERROR)
         end
