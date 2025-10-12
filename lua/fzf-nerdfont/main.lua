@@ -83,8 +83,8 @@ function Main.run(scope)
     local glyphs = get_glyphs_file()
     if not glyphs then
         vim.notify(
-            "you must regenerate the nerdfont glyphs file `:FzfNerdfont generate`",
-            vim.log.levels.WARN
+            "please regenerate the nerdfont glyphs file `:FzfNerdfont generate`",
+            vim.log.levels.ERROR
         )
         return
     end

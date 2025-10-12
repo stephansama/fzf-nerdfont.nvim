@@ -40,7 +40,7 @@ documentation:
 # performs a lint check and fixes issue if possible, following the config in `stylua.toml`.
 lint:
 	stylua . -g '*.lua' -g '!deps/' -g '!nightly/'
-	selene plugin lua
+	selene plugin/ lua/
 
 luals:
 	./scripts/deps.sh luals
