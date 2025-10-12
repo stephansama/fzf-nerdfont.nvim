@@ -47,6 +47,8 @@ local function get_glyphs_file()
     end
 end
 
+--- Runs the fzf-lua command
+---
 function Main.run()
     local ok, fzf_lua = pcall(require, "fzf-lua")
     if not (ok and fzf_lua) then
@@ -80,6 +82,8 @@ function Main.run()
     })
 end
 
+--- Deletes the `glyphnames` file.
+---
 function Main.delete()
     if vim.fn.isdirectory(config.options.glyphs_dir) == 1 then
         local filename = fs.join_path({ config.options.glyphs_dir, "glyphnames" })

@@ -72,6 +72,16 @@ Retrieve the location of the glyphs file.
 @return string[]|nil
 
 ------------------------------------------------------------------------------
+                                                                    *Main.run()*
+                                  `Main.run`()
+Runs the fzf-lua command
+
+------------------------------------------------------------------------------
+                                                                 *Main.delete()*
+                                `Main.delete`()
+Deletes the `glyphnames` file.
+
+------------------------------------------------------------------------------
                                                                *Main.generate()*
                                `Main.generate`()
 Generates the `glyphnames` file.
