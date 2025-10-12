@@ -2,7 +2,7 @@
 ------------------------------------------------------------------------------
                                                                    *FzfNerdFont*
                                  `FzfNerdFont`
-@class FzfNerdFont
+@class FzfNerdFont : FzfNerdFont.Main
 
 ------------------------------------------------------------------------------
                                                                 *_G.FzfNerdfont*
@@ -17,23 +17,29 @@
 @class FzfNerdFont.Config
 
 ------------------------------------------------------------------------------
+Class ~
+{FzfNerdFontOpts}
+Fields ~
+{debug} `(boolean)` Prints useful logs about what events are triggered
+{glyphs_dir} `(string)` Sets the location in which the `glyphnames` file will be saved at.
+{prompt} `(string)` Sets the prompt used for the fzf-lua command
+
+------------------------------------------------------------------------------
                                                         *FzfNerdConfig.defaults*
                             `FzfNerdConfig.defaults`
-`FzfNerdfont` options spec.
-
-@class FzfNerdFont.options
+@class FzfNerdFontOpts
 
 ------------------------------------------------------------------------------
                                                          *FzfNerdConfig.options*
                             `FzfNerdConfig.options`
-@class FzfNerdFont.options
+@class FzfNerdFontOpts
 
 ------------------------------------------------------------------------------
                                                          *FzfNerdConfig.setup()*
                         `FzfNerdConfig.setup`({options})
 Defines your `fzf-nerdfont` setup.
 
-@param options? FzfNerdFont.options Module config table. See |FzfNerdfont.options|.
+@param options? FzfNerdFontOpts Module config table. See |FzfNerdfont.options|.
 
 
 ==============================================================================
@@ -41,18 +47,6 @@ Defines your `fzf-nerdfont` setup.
                                                                           *Main*
                                      `Main`
 @class FzfNerdFont.Main
-
-------------------------------------------------------------------------------
-                                                               *get_separator()*
-                               `get_separator`()
-Set the path separator depending on whether the user's in a Windows OS or not.
-
-@return "\\"|"/"
-
-------------------------------------------------------------------------------
-                                                                   *join_path()*
-                              `join_path`({path})
-@param path string[]
 
 ------------------------------------------------------------------------------
                                                                  *insert_text()*
@@ -79,10 +73,13 @@ Retrieve the location of the glyphs file.
 
 ------------------------------------------------------------------------------
                                                                     *Main.run()*
-                              `Main.run`({scope})
-Initializes the plugin, sets event listeners and internal state.
+                                  `Main.run`()
+Runs the fzf-lua command
 
-@param scope string|nil: internal identifier for logging purposes.
+------------------------------------------------------------------------------
+                                                                 *Main.delete()*
+                                `Main.delete`()
+Deletes the `glyphnames` file.
 
 ------------------------------------------------------------------------------
                                                                *Main.generate()*
@@ -101,6 +98,18 @@ Generates the `glyphnames` file.
                                                                    *state.new()*
                                  `state.new`()
 Sets the state to its original value.
+
+
+==============================================================================
+------------------------------------------------------------------------------
+                                                            *fs.get_separator()*
+                              `fs.get_separator`()
+@return "\\"|"/"
+
+------------------------------------------------------------------------------
+                                                                *fs.join_path()*
+                             `fs.join_path`({path})
+@param path string[]
 
 
 ==============================================================================

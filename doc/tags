@@ -4,13 +4,14 @@ FzfNerdConfig.options	fzf-nerdfont.txt	/*FzfNerdConfig.options*
 FzfNerdConfig.setup()	fzf-nerdfont.txt	/*FzfNerdConfig.setup()*
 FzfNerdFont	fzf-nerdfont.txt	/*FzfNerdFont*
 Main	fzf-nerdfont.txt	/*Main*
+Main.delete()	fzf-nerdfont.txt	/*Main.delete()*
 Main.generate()	fzf-nerdfont.txt	/*Main.generate()*
 Main.run()	fzf-nerdfont.txt	/*Main.run()*
 _G.FzfNerdfont	fzf-nerdfont.txt	/*_G.FzfNerdfont*
+fs.get_separator()	fzf-nerdfont.txt	/*fs.get_separator()*
+fs.join_path()	fzf-nerdfont.txt	/*fs.join_path()*
 get_glyphs_file()	fzf-nerdfont.txt	/*get_glyphs_file()*
-get_separator()	fzf-nerdfont.txt	/*get_separator()*
 insert_text()	fzf-nerdfont.txt	/*insert_text()*
-join_path()	fzf-nerdfont.txt	/*join_path()*
 log	fzf-nerdfont.txt	/*log*
 log.debug()	fzf-nerdfont.txt	/*log.debug()*
 log.notify()	fzf-nerdfont.txt	/*log.notify()*

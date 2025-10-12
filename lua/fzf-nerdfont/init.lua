@@ -1,25 +1,19 @@
 local main = require("fzf-nerdfont.main")
 local config = require("fzf-nerdfont.config")
 
---- @class FzfNerdFont
+--- @class FzfNerdFont : FzfNerdFont.Main
 local FzfNerdFont = {}
 
 FzfNerdFont.setup = config.setup
 
-function FzfNerdFont.run()
-    if vim.g.fzf_nerd_font_setup ~= 1 then
-        config.setup()
+for key, func in pairs(main) do
+    FzfNerdFont[key] = function()
+        if vim.g.fzf_nerd_font_setup ~= 1 then
+            config.setup()
+        end
+
+        func()
     end
-
-    main.run("public_api_toggle")
-end
-
-function FzfNerdFont.generate()
-    if vim.g.fzf_nerd_font_setup ~= 1 then
-        config.setup()
-    end
-
-    main.generate()
 end
 
 --- @class FzfNerdFont

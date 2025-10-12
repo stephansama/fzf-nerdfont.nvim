@@ -1,3 +1,4 @@
+local fs = require("fzf-nerdfont.util.fs")
 local log = require("fzf-nerdfont.util.log")
 local config = require("fzf-nerdfont.config")
 
@@ -5,29 +6,6 @@ local config = require("fzf-nerdfont.config")
 local Main = {}
 
 local _unpack = unpack or table.unpack
-
---- Set the path separator depending on whether the user's in a Windows OS or not.
----
---- @return "\\"|"/"
-local function get_separator()
-    return vim.fn.has("win32") == 1 and "\\" or "/"
-end
-
---- @param path string[]
-local function join_path(path)
-    local sep = get_separator()
-    local str = ""
-
-    for index, curr in ipairs(path) do
-        if index == 1 then
-            str = curr
-        else
-            str = str .. sep .. curr
-        end
-    end
-
-    return str
-end
 
 --- @param txt string
 --- @param bufnr integer
@@ -55,6 +33,7 @@ local function set_icon(selected, bufnr, win)
     for _, f in ipairs(selected) do
         insert_text(f, bufnr, win)
     end
+
     vim.cmd.quit({ bang = true })
 end
 
@@ -62,18 +41,15 @@ end
 ---
 --- @return string[]|nil
 local function get_glyphs_file()
-    local glyph_filename = join_path({ config.options.glyphs_dir, "glyphnames" })
+    local glyph_filename = fs.join_path({ config.options.glyphs_dir, "glyphnames" })
     if vim.fn.filereadable(glyph_filename) == 1 then
         return vim.fn.readfile(glyph_filename)
     end
 end
 
---- Initializes the plugin, sets event listeners and internal state.
+--- Runs the fzf-lua command
 ---
---- @param scope string|nil: internal identifier for logging purposes.
-function Main.run(scope)
-    scope = scope or ""
-
+function Main.run()
     local ok, fzf_lua = pcall(require, "fzf-lua")
     if not (ok and fzf_lua) then
         vim.notify("`fzf-lua` unavailable!", vim.log.levels.ERROR, { title = "FzfNerdFont" })
@@ -82,21 +58,20 @@ function Main.run(scope)
 
     local glyphs = get_glyphs_file()
     if not glyphs then
-        vim.notify(
+        return vim.notify(
             "please regenerate the nerdfont glyphs file `:FzfNerdfont generate`",
             vim.log.levels.ERROR
         )
-        return
     end
 
-    log.debug(scope, "fzf-nerdfont enabled")
+    log.debug("run", "fzf-nerdfont enabled")
 
     local original_buf = vim.api.nvim_get_current_buf()
     local original_win = vim.api.nvim_get_current_win()
 
     fzf_lua.fzf_exec(glyphs, {
         fzf_opts = { ["--multi"] = true },
-        prompt = "Select Icon>",
+        prompt = config.options.prompt,
         actions = {
             default = {
                 function(selected)
@@ -107,13 +82,25 @@ function Main.run(scope)
     })
 end
 
+--- Deletes the `glyphnames` file.
+---
+function Main.delete()
+    local filename = fs.join_path({ config.options.glyphs_dir, "glyphnames" })
+    if vim.fn.filereadable(filename) == 1 then
+        vim.fn.delete(filename)
+        vim.notify("Successfully deleted glyphs file.", vim.log.levels.INFO)
+    else
+        vim.notify("Unable to find glyphs file", vim.log.levels.ERROR)
+    end
+end
+
 --- Generates the `glyphnames` file.
 ---
 function Main.generate()
     local current_path = debug.getinfo(1, "S").source:sub(2)
-    local pattern = join_path({ "^(.-)", "lua" })
+    local pattern = fs.join_path({ "^(.-)", "lua" })
     local root = current_path:match(pattern) --- @type string
-    local script_path = join_path({ root, "scripts", "update_glyphs.sh" })
+    local script_path = fs.join_path({ root, "scripts", "update_glyphs.sh" })
     local code = vim.system(
         { "sh", "-c", script_path },
         { env = { GLYPHS_DIR = config.options.glyphs_dir } }
@@ -121,8 +108,7 @@ function Main.generate()
         :wait().code
 
     if code == 0 then
-        vim.notify("Successfully generated nerdfont glyphs", vim.log.levels.INFO)
-        return
+        return vim.notify("Successfully generated nerdfont glyphs", vim.log.levels.INFO)
     end
 
     error("Failed to generate nerdfont glyphs", vim.log.levels.ERROR)
