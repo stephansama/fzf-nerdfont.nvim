@@ -48,14 +48,16 @@ require("lazy").setup({
 ## ⚙ Configuration
 
 > [!NOTE]
-> The options are also available in Neovim by calling `:h fzf-nerdfont.options`
+> The options are also available in Neovim by running `:h fzf-nerdfont.options`
 
 <details>
-<summary>Click to unfold the full list of options with their default values</summary>
+<summary><b>Click to unfold the full list of options with their default values</b></summary>
 
 ```lua
 require("fzf-nerdfont").setup({
-    -- you can copy the full list from lua/fzf-nerdfont/config.lua
+  debug = false, -- Debugging
+  glyphs_dir = vim.fn.stdpath("data") .. "/fzf-nerdfont", -- The directory in which glyphs will be saved
+  prompt = "Select Icon>", -- The fzf-lua prompt
 })
 ```
 
