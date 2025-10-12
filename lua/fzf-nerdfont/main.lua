@@ -113,7 +113,11 @@ function Main.generate()
     local pattern = join_path({ "^(.-)", "lua" })
     local root = current_path:match(pattern) --- @type string
     local script_path = join_path({ root, "scripts", "update_glyphs.sh" })
-    local code = vim.system({ "sh", "-c", script_path }):wait().code
+    local code = vim.system(
+        { "sh", "-c", script_path },
+        { env = { GLYPHS_DIR = config.options.glyphs_dir } }
+    )
+        :wait().code
 
     if code == 0 then
         vim.notify("Successfully generated nerdfont glyphs", vim.log.levels.INFO)

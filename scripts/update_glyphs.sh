@@ -2,8 +2,7 @@
 
 set -o pipefail
 
-# OUTPUT="lua/fzf-nerdfont/glyphnames"
-OUTPUT="$(nvim --headless --clean -c 'echo stdpath("data")' -c 'qa!' 2>&1)/glyphnames"
+OUTPUT="${GLYPHS_DIR}/glyphnames"
 
 rm -f "$OUTPUT"
 
