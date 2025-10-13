@@ -91,8 +91,12 @@ function FzfNerdMain.delete()
         return
     end
 
-    vim.fn.delete(filename)
-    vim.notify("Successfully deleted glyphs file.", vim.log.levels.INFO)
+    if vim.fn.delete(filename) == 0 then
+        vim.notify("Successfully deleted glyphs file.", vim.log.levels.INFO)
+        return
+    end
+
+    vim.notify("Glyphs file could not be deleted!", vim.log.levels.ERROR)
 end
 
 --- Generates the `glyphnames` file.
@@ -113,7 +117,7 @@ function FzfNerdMain.generate()
         return
     end
 
-    error("Failed to generate nerdfont glyphs", vim.log.levels.ERROR)
+    vim.notify("Failed to generate nerdfont glyphs!", vim.log.levels.ERROR)
 end
 
 return FzfNerdMain
