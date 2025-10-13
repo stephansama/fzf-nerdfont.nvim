@@ -1,6 +1,7 @@
 local fs = require("fzf-nerdfont.util.fs")
 local log = require("fzf-nerdfont.util.log")
 local config = require("fzf-nerdfont.config")
+local unpack = unpack or table.unpack
 
 --- @class FzfNerdFont.Main
 local FzfNerdMain = {}
@@ -9,7 +10,6 @@ local FzfNerdMain = {}
 --- @param bufnr integer
 --- @param win integer
 local function insert_text(txt, bufnr, win)
-    local unpack = unpack or table.unpack
     local row, col = unpack(vim.api.nvim_win_get_cursor(win))
     local line = unpack(vim.api.nvim_buf_get_lines(bufnr, row - 1, row, false))
     local icon = txt:match("^(%S+)")
