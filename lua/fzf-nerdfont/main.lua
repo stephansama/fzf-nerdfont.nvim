@@ -57,10 +57,11 @@ function FzfNerdMain.run()
 
     local glyphs = get_glyphs_file()
     if not glyphs then
-        return vim.notify(
+        vim.notify(
             "please regenerate the nerdfont glyphs file `:FzfNerdfont generate`",
             vim.log.levels.ERROR
         )
+        return
     end
 
     log.debug("run", "fzf-nerdfont enabled")
@@ -108,7 +109,8 @@ function FzfNerdMain.generate()
         :wait().code
 
     if code == 0 then
-        return vim.notify("Successfully generated nerdfont glyphs", vim.log.levels.INFO)
+        vim.notify("Successfully generated nerdfont glyphs", vim.log.levels.INFO)
+        return
     end
 
     error("Failed to generate nerdfont glyphs", vim.log.levels.ERROR)

@@ -5,7 +5,7 @@ local Helpers = {}
 Helpers.expect = vim.deepcopy(MiniTest.expect)
 
 local function error_message(str, pattern)
-    return string.format("Pattern: %s\nObserved string: %s", vim.inspect(pattern), str)
+    return ("Pattern: %s\nObserved string: %s"):format(vim.inspect(pattern), str)
 end
 
 Helpers.expect.buf_width = MiniTest.new_expectation(
@@ -84,8 +84,7 @@ Helpers.new_child_neovim = function()
             return
         end
 
-        local msg =
-            string.format("Can not use `child.%s` because child process is blocked.", method)
+        local msg = ("Can not use `child.%s` because child process is blocked."):format(method)
         error(msg)
     end
 
