@@ -17,14 +17,6 @@
 @class FzfNerdFont.Config
 
 ------------------------------------------------------------------------------
-Class ~
-{FzfNerdFontOpts}
-Fields ~
-{debug} `(boolean)` Prints useful logs about what events are triggered
-{glyphs_dir} `(string)` Sets the location in which the `glyphnames` file will be saved at.
-{prompt} `(string)` Sets the prompt used for the fzf-lua command
-
-------------------------------------------------------------------------------
                                                         *FzfNerdConfig.defaults*
                             `FzfNerdConfig.defaults`
 @class FzfNerdFontOpts
@@ -44,8 +36,8 @@ Defines your `fzf-nerdfont` setup.
 
 ==============================================================================
 ------------------------------------------------------------------------------
-                                                                          *Main*
-                                     `Main`
+                                                                   *FzfNerdMain*
+                                 `FzfNerdMain`
 @class FzfNerdFont.Main
 
 ------------------------------------------------------------------------------
@@ -72,56 +64,61 @@ Retrieve the location of the glyphs file.
 @return string[]|nil
 
 ------------------------------------------------------------------------------
-                                                                    *Main.run()*
-                                  `Main.run`()
+                                                             *FzfNerdMain.run()*
+                              `FzfNerdMain.run`()
 Runs the fzf-lua command
 
 ------------------------------------------------------------------------------
-                                                                 *Main.delete()*
-                                `Main.delete`()
+                                                          *FzfNerdMain.delete()*
+                             `FzfNerdMain.delete`()
 Deletes the `glyphnames` file.
 
 ------------------------------------------------------------------------------
-                                                               *Main.generate()*
-                               `Main.generate`()
+                                                        *FzfNerdMain.generate()*
+                            `FzfNerdMain.generate`()
 Generates the `glyphnames` file.
 
 
 ==============================================================================
 ------------------------------------------------------------------------------
-                                                                         *state*
-                                    `state`
+                                                                  *FzfNerdState*
+                                 `FzfNerdState`
 @class FzfNerdFont.State
 @field enabled? boolean
 
 ------------------------------------------------------------------------------
-                                                                   *state.new()*
-                                 `state.new`()
+                                                            *FzfNerdState.new()*
+                              `FzfNerdState.new`()
 Sets the state to its original value.
 
 
 ==============================================================================
 ------------------------------------------------------------------------------
-                                                            *fs.get_separator()*
-                              `fs.get_separator`()
+                                                                     *FzfNerdFS*
+                                  `FzfNerdFS`
+@class FzfNerdfont.fs
+
+------------------------------------------------------------------------------
+                                                     *FzfNerdFS.get_separator()*
+                          `FzfNerdFS.get_separator`()
 @return "\\"|"/"
 
 ------------------------------------------------------------------------------
-                                                                *fs.join_path()*
-                             `fs.join_path`({path})
+                                                         *FzfNerdFS.join_path()*
+                         `FzfNerdFS.join_path`({path})
 @param path string[]
 
 
 ==============================================================================
 ------------------------------------------------------------------------------
-                                                                           *log*
-                                     `log`
+                                                                    *FzfNerdLog*
+                                  `FzfNerdLog`
 @class FzfNerdfont.Log
 @field enabled? boolean
 
 ------------------------------------------------------------------------------
-                                                                   *log.debug()*
-                       `log.debug`({scope}, {str}, {...})
+                                                            *FzfNerdLog.debug()*
+                   `FzfNerdLog.debug`({scope}, {str}, {...})
 Runs only if `debug` is enabled.
 
 @param scope string: the scope from where this function is called.
@@ -129,8 +126,8 @@ Runs only if `debug` is enabled.
 @param ... any: the arguments of the formatted string.
 
 ------------------------------------------------------------------------------
-                                                                  *log.notify()*
-            `log.notify`({scope}, {level}, {verbose}, {str}, {...})
+                                                           *FzfNerdLog.notify()*
+         `FzfNerdLog.notify`({scope}, {level}, {verbose}, {str}, {...})
 Notifies the user.
 
 Runs only if `debug` is enabled.
@@ -142,8 +139,8 @@ Runs only if `debug` is enabled.
 @param ... any: the arguments of the formatted string.
 
 ------------------------------------------------------------------------------
-                                                        *log.warn_deprecation()*
-                       `log.warn_deprecation`({options})
+                                                 *FzfNerdLog.warn_deprecation()*
+                    `FzfNerdLog.warn_deprecation`({options})
 Analyzes the user provided `setup` parameters and
 sends a message if they use a deprecated option, then gives the new option to use.
 

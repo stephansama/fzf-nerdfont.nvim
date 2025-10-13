@@ -4,15 +4,16 @@ local fs = require("fzf-nerdfont.util.fs")
 --- @class FzfNerdFont.Config
 local FzfNerdConfig = {}
 
----@class FzfNerdFontOpts
----@field debug boolean Prints useful logs about what events are triggered
----@field glyphs_dir string Sets the location in which the `glyphnames` file will be saved at.
----@field prompt string Sets the prompt used for the fzf-lua command
-
 --- @class FzfNerdFontOpts
 FzfNerdConfig.defaults = {
+    --- Prints useful logs about what events are triggered.
+    --- @type boolean
     debug = false,
+    --- Sets the location in which the `glyphnames` file will be saved at.
+    --- @type string
     glyphs_dir = fs.join_path({ vim.fn.stdpath("data"), "fzf-nerdfont" }),
+    --- Sets the prompt used for the fzf-lua command
+    --- @type string
     prompt = "Select Icon>",
 }
 
