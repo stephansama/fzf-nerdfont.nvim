@@ -10,9 +10,7 @@ all: documentation lint luals test
 test:
 	./scripts/deps.sh mini
 	nvim --version | head -n 1
-	nvim --headless --noplugin -u ./scripts/minimal_init.lua \
-		-c "lua require('mini.test').setup()" \
-		-c "lua MiniTest.run({ execute = { reporter = MiniTest.gen_reporter.stdout({ group_depth = 2 }) } })"
+	nvim --headless --noplugin -u ./scripts/minimal_init.lua -l ./scripts/run_tests.lua -c "qa!"
 
 # runs all the test files on the nightly version, `bob` must be installed.
 test-nightly:
@@ -33,9 +31,7 @@ clean:
 # installs deps, then generates documentation.
 documentation:
 	./scripts/deps.sh mini
-	nvim --headless --noplugin -u ./scripts/minimal_init.lua \
-		-c "lua require('mini.doc').generate()" \
-		-c "qa!"
+	nvim --headless --noplugin -u ./scripts/minimal_init.lua -l ./scripts/gen_docs.lua -c "qa!"
 
 # performs a lint check and fixes issue if possible, following the config in `stylua.toml`.
 lint:

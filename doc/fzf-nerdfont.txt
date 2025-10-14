@@ -14,24 +14,23 @@
 ------------------------------------------------------------------------------
                                                                  *FzfNerdConfig*
                                 `FzfNerdConfig`
+The `fzf-nerdfont.config` module.
+
+It provides the `setup()` function for the plugin,
+aswell as storing the config options for the plugin.
+
 @class FzfNerdFont.Config
 
 ------------------------------------------------------------------------------
-Class ~
-{FzfNerdFontOpts}
-Fields ~
-{debug} `(boolean)` Prints useful logs about what events are triggered
-{glyphs_dir} `(string)` Sets the location in which the `glyphnames` file will be saved at.
-{prompt} `(string)` Sets the prompt used for the fzf-lua command
-
-------------------------------------------------------------------------------
-                                                        *FzfNerdConfig.defaults*
-                            `FzfNerdConfig.defaults`
+                                                                      *defaults*
+                                   `defaults`
 @class FzfNerdFontOpts
 
 ------------------------------------------------------------------------------
                                                          *FzfNerdConfig.options*
                             `FzfNerdConfig.options`
+The config options for `fzf-nerdfont.nvim`.
+
 @class FzfNerdFontOpts
 
 ------------------------------------------------------------------------------
@@ -44,8 +43,8 @@ Defines your `fzf-nerdfont` setup.
 
 ==============================================================================
 ------------------------------------------------------------------------------
-                                                                          *Main*
-                                     `Main`
+                                                                   *FzfNerdMain*
+                                 `FzfNerdMain`
 @class FzfNerdFont.Main
 
 ------------------------------------------------------------------------------
@@ -72,82 +71,100 @@ Retrieve the location of the glyphs file.
 @return string[]|nil
 
 ------------------------------------------------------------------------------
-                                                                    *Main.run()*
-                                  `Main.run`()
+                                                             *FzfNerdMain.run()*
+                              `FzfNerdMain.run`()
 Runs the fzf-lua command
 
 ------------------------------------------------------------------------------
-                                                                 *Main.delete()*
-                                `Main.delete`()
+                                                          *FzfNerdMain.delete()*
+                             `FzfNerdMain.delete`()
 Deletes the `glyphnames` file.
 
 ------------------------------------------------------------------------------
-                                                               *Main.generate()*
-                               `Main.generate`()
+                                                        *FzfNerdMain.generate()*
+                            `FzfNerdMain.generate`()
 Generates the `glyphnames` file.
 
 
 ==============================================================================
 ------------------------------------------------------------------------------
-                                                                         *state*
-                                    `state`
+                                                                  *FzfNerdState*
+                                 `FzfNerdState`
 @class FzfNerdFont.State
-@field enabled? boolean
 
 ------------------------------------------------------------------------------
-                                                                   *state.new()*
-                                 `state.new`()
-Sets the state to its original value.
+                                                            *FzfNerdState.new()*
+                              `FzfNerdState.new`()
+Generates a new `state`.
 
 
 ==============================================================================
 ------------------------------------------------------------------------------
-                                                            *fs.get_separator()*
-                              `fs.get_separator`()
-@return "\\"|"/"
+                                                                     *FzfNerdFS*
+                                  `FzfNerdFS`
+Filesystem utilities for `fzf-nerdfont.nvim`.
+
+@class FzfNerdfont.fs
 
 ------------------------------------------------------------------------------
-                                                                *fs.join_path()*
-                             `fs.join_path`({path})
-@param path string[]
+                                                     *FzfNerdFS.get_separator()*
+                          `FzfNerdFS.get_separator`()
+Generates the appropriate path separator
+for the user's OS.
+
+ - `"/"`: UNIX systems
+ - `"\"`: Windows systems
+
+@return "\\"|"/" sep: the resolved separator.
+
+------------------------------------------------------------------------------
+                                                         *FzfNerdFS.join_path()*
+                         `FzfNerdFS.join_path`({path})
+Given a list of strings, returns a path-like string,
+with the platform-appropriate path separators.
+
+@param path string[]: the path to be processed, converted into a list.
+@return string new_path: the processed path string.
 
 
 ==============================================================================
 ------------------------------------------------------------------------------
-                                                                           *log*
-                                     `log`
+                                                                    *FzfNerdLog*
+                                  `FzfNerdLog`
+Provides logging utilities, built specifically for `fzf-nerdfont.nvim`.
+
 @class FzfNerdfont.Log
 @field enabled? boolean
 
 ------------------------------------------------------------------------------
-                                                                   *log.debug()*
-                       `log.debug`({scope}, {str}, {...})
+                                                            *FzfNerdLog.debug()*
+                   `FzfNerdLog.debug`({scope}, {str}, {...})
 Runs only if `debug` is enabled.
 
 @param scope string: the scope from where this function is called.
 @param str string: the formatted string.
-@param ... any: the arguments of the formatted string.
+@param ... any: any extra arguments for the formatted string.
 
 ------------------------------------------------------------------------------
-                                                                  *log.notify()*
-            `log.notify`({scope}, {level}, {verbose}, {str}, {...})
+                                                           *FzfNerdLog.notify()*
+         `FzfNerdLog.notify`({scope}, {level}, {verbose}, {str}, {...})
 Notifies the user.
-
 Runs only if `debug` is enabled.
 
 @param scope string: the scope from where this function is called.
 @param level integer: the log level of vim.notify.
-@param verbose boolean: when false, only prints when config.debug is true.
+@param verbose boolean: when disabled it will only print if `config.debug` is `true`.
 @param str string: the formatted string.
-@param ... any: the arguments of the formatted string.
+@param ... any: any extra arguments for the formatted string.
 
 ------------------------------------------------------------------------------
-                                                        *log.warn_deprecation()*
-                       `log.warn_deprecation`({options})
-Analyzes the user provided `setup` parameters and
-sends a message if they use a deprecated option, then gives the new option to use.
+                                                 *FzfNerdLog.warn_deprecation()*
+                    `FzfNerdLog.warn_deprecation`({options})
+Analyzes the user's provided config parameters and will
+send a message if any of them use a deprecated option,
+then give the new option to use.
 
-@param options table: the options provided by the user.
+@param options FzfNerdFontOpts: the options provided by the user.
 
 
  vim:tw=78:ts=8:noet:ft=help:norl:

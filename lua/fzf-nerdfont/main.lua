@@ -1,18 +1,17 @@
 local fs = require("fzf-nerdfont.util.fs")
 local log = require("fzf-nerdfont.util.log")
 local config = require("fzf-nerdfont.config")
+local unpack = unpack or table.unpack
 
 --- @class FzfNerdFont.Main
-local Main = {}
-
-local _unpack = unpack or table.unpack
+local FzfNerdMain = {}
 
 --- @param txt string
 --- @param bufnr integer
 --- @param win integer
 local function insert_text(txt, bufnr, win)
-    local row, col = _unpack(vim.api.nvim_win_get_cursor(win))
-    local line = _unpack(vim.api.nvim_buf_get_lines(bufnr, row - 1, row, false))
+    local row, col = unpack(vim.api.nvim_win_get_cursor(win))
+    local line = unpack(vim.api.nvim_buf_get_lines(bufnr, row - 1, row, false))
     local icon = txt:match("^(%S+)")
     local text = line:sub(1, col) .. icon .. line:sub(col + 1)
     local new_line = { text }
@@ -49,7 +48,7 @@ end
 
 --- Runs the fzf-lua command
 ---
-function Main.run()
+function FzfNerdMain.run()
     local ok, fzf_lua = pcall(require, "fzf-lua")
     if not (ok and fzf_lua) then
         vim.notify("`fzf-lua` unavailable!", vim.log.levels.ERROR, { title = "FzfNerdFont" })
@@ -58,10 +57,11 @@ function Main.run()
 
     local glyphs = get_glyphs_file()
     if not glyphs then
-        return vim.notify(
+        vim.notify(
             "please regenerate the nerdfont glyphs file `:FzfNerdfont generate`",
             vim.log.levels.ERROR
         )
+        return
     end
 
     log.debug("run", "fzf-nerdfont enabled")
@@ -74,7 +74,7 @@ function Main.run()
         prompt = config.options.prompt,
         actions = {
             default = {
-                function(selected)
+                function(selected) ---@param selected string[]
                     set_icon(selected, original_buf, original_win)
                 end,
             },
@@ -84,19 +84,24 @@ end
 
 --- Deletes the `glyphnames` file.
 ---
-function Main.delete()
+function FzfNerdMain.delete()
     local filename = fs.join_path({ config.options.glyphs_dir, "glyphnames" })
-    if vim.fn.filereadable(filename) == 1 then
-        vim.fn.delete(filename)
-        vim.notify("Successfully deleted glyphs file.", vim.log.levels.INFO)
-    else
+    if vim.fn.filereadable(filename) ~= 1 then
         vim.notify("Unable to find glyphs file", vim.log.levels.ERROR)
+        return
     end
+
+    if vim.fn.delete(filename) == 0 then
+        vim.notify("Successfully deleted glyphs file.", vim.log.levels.INFO)
+        return
+    end
+
+    vim.notify("Glyphs file could not be deleted!", vim.log.levels.ERROR)
 end
 
 --- Generates the `glyphnames` file.
 ---
-function Main.generate()
+function FzfNerdMain.generate()
     local current_path = debug.getinfo(1, "S").source:sub(2)
     local pattern = fs.join_path({ "^(.-)", "lua" })
     local root = current_path:match(pattern) --- @type string
@@ -108,10 +113,11 @@ function Main.generate()
         :wait().code
 
     if code == 0 then
-        return vim.notify("Successfully generated nerdfont glyphs", vim.log.levels.INFO)
+        vim.notify("Successfully generated nerdfont glyphs", vim.log.levels.INFO)
+        return
     end
 
-    error("Failed to generate nerdfont glyphs", vim.log.levels.ERROR)
+    vim.notify("Failed to generate nerdfont glyphs!", vim.log.levels.ERROR)
 end
 
-return Main
+return FzfNerdMain
