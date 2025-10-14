@@ -6,8 +6,8 @@ local FzfNerdFS = {}
 --- Generates the appropriate path separator
 --- for the user's OS.
 ---
----  - `"/"`: UNIX sistems
----  - `"\"`: Windows sistems
+---  - `"/"`: UNIX systems
+---  - `"\"`: Windows systems
 ---
 --- @return "\\"|"/" sep: the resolved separator.
 function FzfNerdFS.get_separator()
