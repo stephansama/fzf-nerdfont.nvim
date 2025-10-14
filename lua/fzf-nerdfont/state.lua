@@ -1,11 +1,10 @@
 --- @class FzfNerdFont.State
---- @field enabled? boolean
 local FzfNerdState = { enabled = false }
 
---- Sets the state to its original value.
+--- Generates a new `state`.
 ---
 function FzfNerdState.new()
-    local obj = setmetatable({}, { __index = FzfNerdState })
+    local obj = setmetatable({}, { __index = FzfNerdState }) ---@type FzfNerdFont.State
     obj.enabled = false
     return obj
 end

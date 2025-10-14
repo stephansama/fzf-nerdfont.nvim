@@ -14,16 +14,23 @@
 ------------------------------------------------------------------------------
                                                                  *FzfNerdConfig*
                                 `FzfNerdConfig`
+The `fzf-nerdfont.config` module.
+
+It provides the `setup()` function for the plugin,
+aswell as storing the config options for the plugin.
+
 @class FzfNerdFont.Config
 
 ------------------------------------------------------------------------------
-                                                        *FzfNerdConfig.defaults*
-                            `FzfNerdConfig.defaults`
+                                                                      *defaults*
+                                   `defaults`
 @class FzfNerdFontOpts
 
 ------------------------------------------------------------------------------
                                                          *FzfNerdConfig.options*
                             `FzfNerdConfig.options`
+The config options for `fzf-nerdfont.nvim`.
+
 @class FzfNerdFontOpts
 
 ------------------------------------------------------------------------------
@@ -84,35 +91,48 @@ Generates the `glyphnames` file.
                                                                   *FzfNerdState*
                                  `FzfNerdState`
 @class FzfNerdFont.State
-@field enabled? boolean
 
 ------------------------------------------------------------------------------
                                                             *FzfNerdState.new()*
                               `FzfNerdState.new`()
-Sets the state to its original value.
+Generates a new `state`.
 
 
 ==============================================================================
 ------------------------------------------------------------------------------
                                                                      *FzfNerdFS*
                                   `FzfNerdFS`
+Filesystem utilities for `fzf-nerdfont.nvim`.
+
 @class FzfNerdfont.fs
 
 ------------------------------------------------------------------------------
                                                      *FzfNerdFS.get_separator()*
                           `FzfNerdFS.get_separator`()
-@return "\\"|"/"
+Generates the appropriate path separator
+for the user's OS.
+
+ - `"/"`: UNIX sistems
+ - `"\"`: Windows sistems
+
+@return "\\"|"/" sep: the resolved separator.
 
 ------------------------------------------------------------------------------
                                                          *FzfNerdFS.join_path()*
                          `FzfNerdFS.join_path`({path})
-@param path string[]
+Given a list of strings, returns a path-like string,
+with the platform-appropriate path separators.
+
+@param path string[]: the path to be processed, converted into a list.
+@return string new_path: the processed path string.
 
 
 ==============================================================================
 ------------------------------------------------------------------------------
                                                                     *FzfNerdLog*
                                   `FzfNerdLog`
+Provides logging utilities, built specifically for `fzf-nerdfont.nvim`.
+
 @class FzfNerdfont.Log
 @field enabled? boolean
 
@@ -123,28 +143,28 @@ Runs only if `debug` is enabled.
 
 @param scope string: the scope from where this function is called.
 @param str string: the formatted string.
-@param ... any: the arguments of the formatted string.
+@param ... any: any extra arguments for the formatted string.
 
 ------------------------------------------------------------------------------
                                                            *FzfNerdLog.notify()*
          `FzfNerdLog.notify`({scope}, {level}, {verbose}, {str}, {...})
 Notifies the user.
-
 Runs only if `debug` is enabled.
 
 @param scope string: the scope from where this function is called.
 @param level integer: the log level of vim.notify.
-@param verbose boolean: when false, only prints when config.debug is true.
+@param verbose boolean: when disabled it will only print if `config.debug` is `true`.
 @param str string: the formatted string.
-@param ... any: the arguments of the formatted string.
+@param ... any: any extra arguments for the formatted string.
 
 ------------------------------------------------------------------------------
                                                  *FzfNerdLog.warn_deprecation()*
                     `FzfNerdLog.warn_deprecation`({options})
-Analyzes the user provided `setup` parameters and
-sends a message if they use a deprecated option, then gives the new option to use.
+Analyzes the user's provided config parameters and will
+send a message if any of them use a deprecated option,
+then give the new option to use.
 
-@param options table: the options provided by the user.
+@param options FzfNerdFontOpts: the options provided by the user.
 
 
  vim:tw=78:ts=8:noet:ft=help:norl:

@@ -1,3 +1,5 @@
+--- Provides logging utilities, built specifically for `fzf-nerdfont.nvim`.
+---
 --- @class FzfNerdfont.Log
 --- @field enabled? boolean
 local FzfNerdLog = {}
@@ -8,20 +10,19 @@ local MAX_SCOPE = 15
 ---
 --- @param scope string: the scope from where this function is called.
 --- @param str string: the formatted string.
---- @param ... any: the arguments of the formatted string.
+--- @param ... any: any extra arguments for the formatted string.
 function FzfNerdLog.debug(scope, str, ...)
     return FzfNerdLog.notify(scope, vim.log.levels.DEBUG, false, str, ...)
 end
 
 --- Notifies the user.
----
 --- Runs only if `debug` is enabled.
 ---
 --- @param scope string: the scope from where this function is called.
 --- @param level integer: the log level of vim.notify.
---- @param verbose boolean: when false, only prints when config.debug is true.
+--- @param verbose boolean: when disabled it will only print if `config.debug` is `true`.
 --- @param str string: the formatted string.
---- @param ... any: the arguments of the formatted string.
+--- @param ... any: any extra arguments for the formatted string.
 function FzfNerdLog.notify(scope, level, verbose, str, ...)
     if not (verbose and FzfNerdLog.enabled) or vim.g.fzf_nerd_font_setup ~= 1 then
         return
@@ -43,17 +44,15 @@ function FzfNerdLog.notify(scope, level, verbose, str, ...)
     )
 end
 
---- Analyzes the user provided `setup` parameters and
---- sends a message if they use a deprecated option, then gives the new option to use.
+--- Analyzes the user's provided config parameters and will
+--- send a message if any of them use a deprecated option,
+--- then give the new option to use.
 ---
---- @param options table: the options provided by the user.
+--- @param options FzfNerdFontOpts: the options provided by the user.
 function FzfNerdLog.warn_deprecation(options)
     local uses_deprecated_option = false
     local notice = "is now deprecated, use `%s` instead."
-    local root_deprecated = {
-        foo = "bar",
-        bar = "baz",
-    }
+    local root_deprecated = { foo = "bar", bar = "baz" }
 
     for name, warning in pairs(root_deprecated) do
         if options[name] then
@@ -68,12 +67,12 @@ function FzfNerdLog.warn_deprecation(options)
     end
 
     if uses_deprecated_option then
-        FzfNerdLog.notify(
-            "deprecated_options",
-            vim.log.levels.WARN,
-            true,
-            "sorry to bother you with the breaking changes :("
-        )
+        -- FzfNerdLog.notify(
+        --     "deprecated_options",
+        --     vim.log.levels.WARN,
+        --     true,
+        --     "sorry to bother you with the breaking changes :("
+        -- )
         FzfNerdLog.notify(
             "deprecated_options",
             vim.log.levels.WARN,

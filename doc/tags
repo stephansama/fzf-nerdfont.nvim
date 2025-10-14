@@ -1,5 +1,4 @@
 FzfNerdConfig	fzf-nerdfont.txt	/*FzfNerdConfig*
-FzfNerdConfig.defaults	fzf-nerdfont.txt	/*FzfNerdConfig.defaults*
 FzfNerdConfig.options	fzf-nerdfont.txt	/*FzfNerdConfig.options*
 FzfNerdConfig.setup()	fzf-nerdfont.txt	/*FzfNerdConfig.setup()*
 FzfNerdFS	fzf-nerdfont.txt	/*FzfNerdFS*
@@ -17,6 +16,7 @@ FzfNerdMain.run()	fzf-nerdfont.txt	/*FzfNerdMain.run()*
 FzfNerdState	fzf-nerdfont.txt	/*FzfNerdState*
 FzfNerdState.new()	fzf-nerdfont.txt	/*FzfNerdState.new()*
 _G.FzfNerdfont	fzf-nerdfont.txt	/*_G.FzfNerdfont*
+defaults	fzf-nerdfont.txt	/*defaults*
 get_glyphs_file()	fzf-nerdfont.txt	/*get_glyphs_file()*
 insert_text()	fzf-nerdfont.txt	/*insert_text()*
 set_icon()	fzf-nerdfont.txt	/*set_icon()*
