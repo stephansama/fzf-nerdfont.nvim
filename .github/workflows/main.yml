@@ -43,9 +43,11 @@ jobs:
           neovim: true
           version: v0.11.3
       - name: Generate Docs
-        run: make documentation
+        run: |
+          make documentation
       - name: Check Docs Diff
-        run: exit $(git status --porcelain doc | wc -l | tr -d " ")
+        run: |
+          exit "$(git status --porcelain doc | wc -l | tr -d " ")"
   tests:
     needs:
       - lint
@@ -58,8 +60,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-      - run: date +%F > todays-date
-      - name: Restore LuaLS Cache
+      - run: |
+          date +%F > todays-date
+      - name: Restore the LuaLS Cache
         uses: actions/cache@v4
         id: cache
         with:
@@ -67,19 +70,21 @@ jobs:
           key: ${{ env.LUA_LS_VERSION }}
       - name: Setup LuaLS
         if: ${{ steps.cache.outputs.cache-hit != 'true' }}
-        run: mkdir -p .ci/lua-ls && curl -sL "https://github.com/LuaLS/lua-language-server/releases/download/${{ env.LUA_LS_VERSION }}/lua-language-server-${{ env.LUA_LS_VERSION }}-linux-x64.tar.gz" | tar xzf - -C "${PWD}/.ci/lua-ls"
+        run: |
+          mkdir -p .ci/lua-ls && curl -sL "https://github.com/LuaLS/lua-language-server/releases/download/${{ env.LUA_LS_VERSION }}/lua-language-server-${{ env.LUA_LS_VERSION }}-linux-x64.tar.gz" | tar xzf - -C "${PWD}/.ci/lua-ls"
       - name: Setup Neovim
         uses: rhysd/action-setup-vim@v1
         with:
           neovim: true
           version: ${{ matrix.neovim_version }}
-      - name: Run Luals
+      - name: Run LuaLS
         run: |
           export PATH="${PWD}/.ci/lua-ls/bin:${PATH}"
           nvim --version
           make luals
       - name: Run Tests
-        run: make test
+        run: |
+          make test
   tests-nightly:
     name: Test on Neovim Nightly
     runs-on: ubuntu-latest
@@ -91,13 +96,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-      - run: date +%F > todays-date
-      - name: Restore Cache for Today's Nightly.
+      - run: |
+          date +%F > todays-date
+      - name: Restore the Cache for Nightly.
         uses: actions/cache@v4
         with:
           path: _neovim
           key: ${{ runner.os }}-x64-${{ hashFiles('todays-date') }}
-      - name: Restore LuaLS Cache
+      - name: Restore the LuaLS Cache
         uses: actions/cache@v4
         id: cache
         with:
@@ -105,7 +111,8 @@ jobs:
           key: ${{ env.LUA_LS_VERSION }}
       - name: Setup LuaLS
         if: ${{ steps.cache.outputs.cache-hit != 'true' }}
-        run: mkdir -p .ci/lua-ls && curl -sL "https://github.com/LuaLS/lua-language-server/releases/download/${{ env.LUA_LS_VERSION }}/lua-language-server-${{ env.LUA_LS_VERSION }}-linux-x64.tar.gz" | tar xzf - -C "${PWD}/.ci/lua-ls"
+        run: |
+          mkdir -p .ci/lua-ls && curl -sL "https://github.com/LuaLS/lua-language-server/releases/download/${{ env.LUA_LS_VERSION }}/lua-language-server-${{ env.LUA_LS_VERSION }}-linux-x64.tar.gz" | tar xzf - -C "${PWD}/.ci/lua-ls"
       - name: Setup Neovim
         uses: rhysd/action-setup-vim@v1
         with:
@@ -117,7 +124,8 @@ jobs:
           nvim --version
           make luals
       - name: Run Tests
-        run: make test
+        run: |
+          make test
   release:
     name: Release
     if: ${{ github.ref == 'refs/heads/main' }}
