@@ -37,7 +37,7 @@ jobs:
         uses: actions/checkout@v5
         with:
           fetch-depth: 2
-      - name: Setup Neovim
+      - name: "Setup Neovim v0.11.3"
         uses: rhysd/action-setup-vim@v1
         with:
           neovim: true
@@ -72,17 +72,17 @@ jobs:
         if: ${{ steps.cache.outputs.cache-hit != 'true' }}
         run: |
           mkdir -p .ci/lua-ls && curl -sL "https://github.com/LuaLS/lua-language-server/releases/download/${{ env.LUA_LS_VERSION }}/lua-language-server-${{ env.LUA_LS_VERSION }}-linux-x64.tar.gz" | tar xzf - -C "${PWD}/.ci/lua-ls"
-      - name: Setup Neovim
+      - name: Setup Specified Neovim Versions
         uses: rhysd/action-setup-vim@v1
         with:
           neovim: true
           version: ${{ matrix.neovim_version }}
-      - name: Run LuaLS
+      - name: Run LuaLS For Each Neovim Version
         run: |
           export PATH="${PWD}/.ci/lua-ls/bin:${PATH}"
           nvim --version
           make luals
-      - name: Run Tests
+      - name: Run Tests For Each Neovim Version
         run: |
           make test
   tests-nightly:
@@ -98,7 +98,7 @@ jobs:
         uses: actions/checkout@v5
       - run: |
           date +%F > todays-date
-      - name: Restore the Cache for Nightly.
+      - name: Restore the Cache for Nightly
         uses: actions/cache@v4
         with:
           path: _neovim
@@ -113,17 +113,17 @@ jobs:
         if: ${{ steps.cache.outputs.cache-hit != 'true' }}
         run: |
           mkdir -p .ci/lua-ls && curl -sL "https://github.com/LuaLS/lua-language-server/releases/download/${{ env.LUA_LS_VERSION }}/lua-language-server-${{ env.LUA_LS_VERSION }}-linux-x64.tar.gz" | tar xzf - -C "${PWD}/.ci/lua-ls"
-      - name: Setup Neovim
+      - name: Setup Neovim Nightly
         uses: rhysd/action-setup-vim@v1
         with:
           neovim: true
           version: nightly
-      - name: Run LuaLS
+      - name: Run LuaLS Against Neovim Nightly
         run: |
           export PATH="${PWD}/.ci/lua-ls/bin:${PATH}"
           nvim --version
           make luals
-      - name: Run Tests
+      - name: Run Tests Against Neovim Nightly
         run: |
           make test
   release:
