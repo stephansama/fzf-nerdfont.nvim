@@ -47,7 +47,7 @@ __get_lua_ls() {
 	fi
 
 	mkdir -p .ci/lua-ls
-	curl -sL "$LUALS_URL" | tar xzf - -C "$(pwd)/.ci/lua-ls"
+	(set -o pipefail; curl -sL "$LUALS_URL" | tar xzf - -C "$(pwd)/.ci/lua-ls")
 	return $?
 }
 
