@@ -34,12 +34,12 @@ test: ensure-deps/mini
 # runs all the test files on the nightly version, `bob` must be installed.
 test-nightly: ensure-deps/mini
 	@bob use nightly
-	$(MAKE) test
+	@$(MAKE) test
 
 # runs all the test files on the 0.8.3 version, `bob` must be installed.
 test-0.8.3: ensure-deps/mini
 	@bob use 0.8.3
-	$(MAKE) test
+	@$(MAKE) test
 
 # cleans the `deps/` and `.ci/` directories, useful for resetting the environment.
 clean:
