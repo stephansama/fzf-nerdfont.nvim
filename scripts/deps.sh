@@ -2,6 +2,8 @@
 
 # set -x
 
+set -o pipefail
+
 # Print args to `/dev/stderr`.
 error() {
 	local TXT=("$@")
@@ -47,7 +49,7 @@ __get_lua_ls() {
 	fi
 
 	mkdir -p .ci/lua-ls
-	(set -o pipefail; curl -sL "$LUALS_URL" | tar xzf - -C "$(pwd)/.ci/lua-ls")
+	curl -sL "$LUALS_URL" | tar xzf - -C "$(pwd)/.ci/lua-ls"
 	return $?
 }
 
