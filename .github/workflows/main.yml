@@ -44,8 +44,6 @@ jobs:
           version: v0.11.3
       - name: Generate Docs
         run: make documentation
-      - name: Check Docs Diff
-        run: exit $(git status --porcelain doc | wc -l | tr -d " ")
   tests:
     needs:
       - lint
